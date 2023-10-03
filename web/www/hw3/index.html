@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<!--
+Sources used: https://cs4640.cs.virginia.edu, geeksforgeeks.com, stackoverflow.com, w3schools.com
+-->
+
+<!-- Bootstrap Elements Used:
+- Navbar
+- Card grouping
+- Footer/copyright element
+- Title element
+- Accordian element
+-->
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+        <meta name="author" content="Russell Lee, rsl7ej">
+        <meta name="description" content="How to lift weights">
+        <meta name="keywords" content="powerlifting, lifting, gym, weights, exercise">   
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"  crossorigin="anonymous">
+
+        <link rel="stylesheet/less" type="text/css" href="styles/custom.less">
+
+        <title>Powerlifting</title>     
+    </head>  
+    
+    <body data-bs-theme="dark">
+
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Powerlifting!</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Squat</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Bench</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Deadlift</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pull-Up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Curls</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container py-5">
+        <h1 class="display-5 fw-bold">Powerlifting</h1>
+        <p class="col-md-8 fs-4 generic">Become proficient at moving weights</p>
+      </div>
+
+      <div class="container py-3">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Strength
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>Lifting big will make you strong.</strong> Lifting heavy weights will 
+                increase your muscular strength, making you an every-day superhero.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Longevity
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>Lifting big will allow you to keep your youth.</strong> Lifting heavy
+                weights with proper technique will increase your longevity and will allow you
+                to reduce your difficulties with small pains.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Happiness
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>Lifting big will make you happy.</strong>Lifting heavy weights will 
+                induce seratonine and dopamine release, and will ease the pains of everyday 
+                life.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container py-5">
+        <div class="card-group">
+          <div class="card">
+            <img src="images/squat1.jpeg" class="card-img-top" alt="Man squatting a large weight">
+            <div class="card-body">
+              <h5 class="card-title"><Strong>Learn how to squat!</Strong></h5>
+              <p class="card-text">The squat will develop your quads, hamstrings, glutes, and lower back in ways you 
+                could never imagine. Learning crucial squat technique tips will improve your rate
+                of progress in the gym and reduce your risk of injury. Squatting is key to your 
+                development!</p>
+                <a href="#" class="btn-primary stretched-link">Go to squatting page</a>
+            </div> 
+          </div>
+          <div class="card">
+            <img src="images/bench1.jpeg" class="card-img-top" alt="Man preparing to perform a bench press">
+            <div class="card-body">
+              <h5 class="card-title"><Strong>Learn how to bench!</Strong></h5>
+              <p class="card-text">The bench press will develop your chest, shoulders, and triceps in ways you could
+                never imagine. Learning crucial bench press technique tips will improve your rate
+                of progress in the gym and reduce your risk of injury. Benching is key to your 
+                development!</p>
+              <a href="#" class="btn-primary stretched-link">Go to benching page</a>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/deadlift1.jpeg" class="card-img-top" alt="Man deadlifting a large weight">
+            <div class="card-body">
+              <h5 class="card-title"><Strong>Learn how to deadlift!</Strong></h5>
+              <p class="card-text">The deadlift will develop your spinal erectors and back in ways you could never 
+                imagine. Learning crucial deadlift technique tips will improve your rate of 
+                progress in the gym and reduce your risk of injury. Deadlifting is key to your 
+                development!</p>
+              <a href="#" class="btn-primary stretched-link">Go to deadlifting page</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Squat</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Bench</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Deadlift</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pull-Up</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Curls</a></li>
+          </ul>
+          <p class="text-center text-muted">&copy; 2023 Russell, Inc</p>
+        </footer>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/less" ></script>
+    </body>
+</html>
