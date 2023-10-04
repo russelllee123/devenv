@@ -76,15 +76,24 @@
 }
 
 .align-left {
-    float: left;
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 0 auto;
 }
 
 .align-right {
-    float: right;
-    margin-right: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 720px) {
+    .align-left {
+        float: left;
+        margin-left: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .align-right {
+        float: right;
+        margin-right: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
