@@ -39,10 +39,11 @@
     flex-wrap: wrap;
     flex-direction: row;  
     display: flex;
-    text-align: center;
 }
 
-.add-padding {
+.text-box {
+    justify-content: center;
+    align-items: center;
     padding: 10px;
 }
 
@@ -52,7 +53,6 @@
     width: 100%;
     object-fit: contain;
 }
-
 
 @media screen and (min-width: 720px) {
     .box {
