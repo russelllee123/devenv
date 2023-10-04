@@ -35,7 +35,7 @@
     border-radius: 10px;
     border-color: grey;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     flex-wrap: wrap;
     flex-direction: row;  
     display: flex;
@@ -77,23 +77,23 @@
 
 .align-left {
     margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .align-right {
     margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width: 720px) {
     .align-left {
         float: left;
         margin-left: 30px;
-        margin-top: 10px;
-        margin-bottom: 10px;
     }
     .align-right {
         float: right;
         margin-right: 30px;
-        margin-top: 10px;
-        margin-bottom: 10px;
     }
 }
