@@ -63,3 +63,28 @@
         text-align: center;
     }
 }
+
+.contain-two-images img{
+    border-radius: 8px;
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+}
+
+.half-box {
+    width: 50%;
+}
+
+.align-left {
+    float: left;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.align-right {
+    float: right;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
