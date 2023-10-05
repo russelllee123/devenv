@@ -134,13 +134,7 @@
     width: 50%;
 }
 
-.align-left {
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.align-right {
+.align-left, .align-right {
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 10px;
