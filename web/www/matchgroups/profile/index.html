@@ -51,52 +51,60 @@ Sources used: https://cs4640.cs.virginia.edu,
         </nav>
 
           <br>
+
+          <div class="invisible-box text-box">
+            <h1 class="display-6">Update your profile:</h1> <br>
+          </div>
           
           <form action="../profile">
-            <div class="text text-box">
-                <div class="form-group">
-                  <label for="group">Group Name</label>
-                  <input type="text" class="form-control" id="group" placeholder="Swing Dance">
-                </div>
-            </div>
-          
-            <div class="text text-box">
-              <div class="form-group">
-                <label for="description">Group Description</label>
-                <textarea type="text" class="form-control" id="description" rows = 4 placeholder="The University of Virginia's foremost swing dance club and team. We hold biweekly socials and compete once a semester."></textarea>
+            <div class="invisible-box text-box">
+              <div class="form-group input-box">
+                <label for="name">Group Name:</label>
+                <input type="email" class="form-control" id="name" placeholder="Swing Dance">
               </div>
             </div>
+          
+            <div class="invisible-box text-box">
+                <div class="form-group input-box">
+                  <label for="description">Group Description:</label>
+                  <textarea type="text" class="form-control" id="description" rows = 4 placeholder="The University of Virginia's foremost swing dance club and team. We hold biweekly socials and compete once a semester."></textarea>
+                </div>
+            </div>
 
-            <div class="text text-box">
-              <div class="form-group">
-                <label for="members">Group Members</label>
+            <div class="invisible-box text-box">
+              <div class="form-group input-box">
+                <label for="members">Group Members:</label>
                 <textarea type="text" class="form-control" id="members" rows = 3 placeholder="Katie Foster, Amy Beauchamp, Sarah Lewis, Rand Goshen, Paul Vaguely "></textarea>
               </div>
             </div>
 
+            <br>
+
             <div class="box contain-image">
               <img src="../images/swingDanceMany.jpg" alt="Team of frisbee players">
             </div>
-            
-            <div class="box text-box">
-              <div class="form-group">
-                <label for="exampleFormControlFile1">First Image: </label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+
+            <div class="invisible-box text-box">
+              <div class="mb-3">
+                <label for="image1" class="form-label">Profile Photo:</label>
+                <input class="form-control" type="file" id="image1">
               </div>
             </div>
+
+            <br>
 
             <div class="box contain-image">
               <img src="../images/swingDanceFew.jpg" alt="Team of frisbee players">
             </div>
 
-            <div class="box text-box">
-              <div class="form-group">
-                <label for="exampleFormControlFile1">Second Image: </label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <div class="invisible-box text-box">
+              <div class="mb-3">
+                <label for="image2" class="form-label">Second photo:</label>
+                <input class="form-control" type="file" id="image2">
               </div>
             </div>
 
-            <div class="box text-box">
+            <div class="invisible-box text-box">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>

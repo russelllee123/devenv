@@ -49,6 +49,7 @@
     flex-wrap: wrap;
     flex-direction: row;  
     display: flex;
+    text-align: center;
 }
 
 .full-box {
@@ -83,6 +84,13 @@
     object-fit: contain;
 }
 
+.input-box {
+    margin: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;  
+    display: flex;
+}
+
 @media screen and (min-width: 720px) {
     .box {
         width: 700px;
@@ -90,6 +98,10 @@
         margin-top: 10px;
         margin-bottom: 10px;
         text-align: center;
+    }
+    .input-box {
+        width: 700px;
+        margin: 0 auto;
     }
 }
 
