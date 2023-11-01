@@ -54,7 +54,14 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </form>
           </div>
           <div class="row">
-            <br>
+            <br>  
+            <?php 
+              if ($message != "") {
+                echo "<div class=\"alert alert-danger\" role=\"alert\">
+                        $message
+                      </div>";
+              }
+            ?>
             <br>
           </div>
           <div class="row text-center">
