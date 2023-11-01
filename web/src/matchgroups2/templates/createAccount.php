@@ -42,6 +42,10 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <div class="row general">
 
             <form action="?command=createAccount" method="post">
+              <div class="form-group"> 
+                <label for="name" class="form-label">Group Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter group name">
+              </div>
               <div class="form-group">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
