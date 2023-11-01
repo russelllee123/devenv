@@ -56,43 +56,9 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <br>
 
           <div class="invisible-box text-box">
-            <h1 class="display-6"><?=$name?></h1> <br>
+            <h1 class="display-6">No Possible Matches</h1> <br>
           </div>
 
-          <?php if ($image1 !== ""){ ?>
-          <div class="box contain-image">
-            <img src="../images/<?=$image1?>" alt="Team of frisbee players">
-          </div>
-          <?php } ?>
-          
-          <?php if ($description !== ""){ ?>
-          <div class="box text-box">
-            <p> <?=$description?>
-            </p>
-          </div>
-          <?php } ?>
-
-          <?php if ($image2 !== ""){ ?>
-          <div class="box contain-image">
-            <img src="../images/<?=$image2?>" alt="Team of frisbee players">
-          </div>
-          <?php } ?>
-
-          <?php if ($members !== ""){ ?>
-          <div class="box text-box">
-            <p>Members: <?=$members?></p>
-          </div>
-          <?php } ?>
-
-
-          <div class="box contain-two-images">
-            <div class="half-box">
-              <a href="#"><img src="../images/thumbs-up.jpg" class="align-left" alt="Thumbs-up"></a>
-            </div>
-            <div class="half-box">
-              <a href="#"><img src="../images/thumbs-down.jpg" class="align-right" alt="Thumbs-down"></a>
-            </div>
-          </div>
           <div class="d-flex flex-column">
             <div class="wrapper flex-grow-1"></div>
             <div class="container">

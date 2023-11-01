@@ -8,6 +8,6 @@ spl_autoload_register(function ($classname) {
 });
         
 
-$trivia = new matchgroupsController($_GET);
+$matchGroups = new matchgroupsController($_GET);
 
-$trivia->run();
+$matchGroups->run();
