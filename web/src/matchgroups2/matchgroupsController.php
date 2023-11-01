@@ -28,6 +28,7 @@ class matchgroupsController {
         switch($command) {
             case "login":
                 $this->login();
+                break;
             case "stack":
                 $this->showStack();
                 break;
@@ -60,10 +61,11 @@ class matchgroupsController {
      * Show the welcome page to the user.
      */
     public function showWelcome() {
-        $message = "";
-        if (!empty($this->errorMessage))
-            $message .= "<p class='alert alert-danger'>".$this->errorMessage."</p>";
         include("templates/welcome.php");
+    }
+
+    public function displayLogin() {
+        include("templates/login.php");
     }
 
 }
