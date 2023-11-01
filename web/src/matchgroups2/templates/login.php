@@ -40,25 +40,28 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <br>
           </div>
           <div class="row general">
-              <form action="../home/">
-                <div class="form-group">
-                  <label for="emailInput">Email address</label>
-                  <input type="email" class="form-control" id="emailInput" placeholder="Enter email">
-                </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <br>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+            <form action="?command=login" method="post">
+              <div class="form-group">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="passwd" class="form-label">Password</label>
+                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Enter password">
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
           <div class="row">
             <br>
             <br>
           </div>
           <div class="row text-center">
-            <h6>Don't have an account?<a href="../createAccount/"> Make one</a></h6>
+            <h6>Don't have an account?<h6>
+            <form action="?command=displayCreateAccount" method="post"> 
+              <button type="submit" class="btn btn-primary">Make One</button>
+            </form>
           </div>
         </div>
       </div>

@@ -40,29 +40,33 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <br>
           </div>
           <div class="row general">
-              <form action="../profile/">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword2">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                  </div>
-                  <br>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+
+            <form action="?command=createAccount" method="post">
+              <div class="form-group">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="passwd" class="form-label">Password</label>
+                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Enter password">
+              </div>
+              <div class="form-group">
+                <label for="passwd2" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="Enter password again">
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
           <div class="row">
             <br>
             <br>
           </div>
           <div class="row text-center">
-            <h6>Already have an account?  <a href="../login/"> Login</a></h6>
+            <h6>Already have an account?<h6>
+            <form action="?command=displayLogin" method="post"> 
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
           </div>
         </div>
       </div>

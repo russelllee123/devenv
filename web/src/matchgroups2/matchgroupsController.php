@@ -68,4 +68,8 @@ class matchgroupsController {
         include("templates/login.php");
     }
 
+    public function displayCreateAccount() {
+        include("templates/createAccount.php");
+    }
+
 }
