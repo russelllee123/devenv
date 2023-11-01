@@ -18,7 +18,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"  crossorigin="anonymous">
 
-        <link rel="stylesheet" href="/opt/www/matchgroups2/styles/main.css">
+        <link rel="stylesheet" href="/matchgroups2/styles/main.css"">
 
         <title>Match Groups!</title>     
     </head>  

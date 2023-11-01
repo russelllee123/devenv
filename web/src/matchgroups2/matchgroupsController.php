@@ -29,19 +29,20 @@ class matchgroupsController {
             case "login":
                 $this->login();
                 break;
-            case "stack":
-                $this->showStack();
-                break;
             case "createAccount":
                 $this->createAccount();
-            case "profile":
-                $this->showProfile();
                 break;
             case "displayLogin":
                 $this->displayLogin();
                 break;
             case "displayCreateAccount":
                 $this->displayCreateAccount();
+                break;
+            case "stack":
+                $this->showStack();
+                break;
+            case "profile":
+                $this->showProfile();
                 break;
             case "matches":
                 $this->showMatches();
@@ -70,6 +71,14 @@ class matchgroupsController {
 
     public function displayCreateAccount() {
         include("templates/createAccount.php");
+    }
+
+    public function login() {
+
+    }
+
+    public function createAccount() {
+
     }
 
 }
