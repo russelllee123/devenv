@@ -1,0 +1,152 @@
+.homepage {
+    background-image: url('../images/friends-laughing.jpg');
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.general {
+	padding: 10px;
+    border: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-color: lightgrey;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+    background-color: rgb(225, 225, 225);
+}
+
+.box {
+    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    flex-wrap: wrap;
+    flex-direction: row;  
+    display: flex;
+}
+
+.invisible-box {
+    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;  
+    display: flex;
+    text-align: center;
+}
+
+.full-box {
+    margin-left: 10px;
+    border-radius: 10px;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    flex-wrap: wrap;
+    flex-direction: row;  
+    display: flex;
+    flex-grow: 1;
+}
+
+.text-box {
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.profile-image img {
+    border-radius: 8px;
+    height: 60px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.contain-image img {
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.input-box {
+    margin: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;  
+    display: flex;
+}
+
+@media screen and (min-width: 720px) {
+    .box {
+        width: 700px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .input-box {
+        width: 700px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 520px) {
+    .invisible-box {
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;  
+    }
+}
+
+@media screen and (min-width: 520px) {
+    .profile-image img {
+        border-radius: 8px;
+        height: 100px;
+        width: 100px; 
+    }
+}
+
+.contain-two-images img{
+    border-radius: 8px;
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+}
+
+.half-box {
+    width: 50%;
+}
+
+.align-left, .align-right {
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 720px) {
+    .align-left {
+        float: left;
+        margin-left: 30px;
+    }
+    .align-right {
+        float: right;
+        margin-right: 30px;
+    }
+}
