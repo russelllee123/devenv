@@ -15,10 +15,7 @@
     }
 
     // Drop tables and sequences
-    $res  = pg_query($dbHandle, "drop sequence if exists question_seq;");
     $res  = pg_query($dbHandle, "drop sequence if exists user_seq;");
-    $res  = pg_query($dbHandle, "drop sequence if exists userquestion_seq;");
-    $res  = pg_query($dbHandle, "drop table if exists questions;");
     $res  = pg_query($dbHandle, "drop table if exists users;");
 
     // Create sequences
@@ -28,7 +25,11 @@
             id  int primary key default nextval('user_seq'),
             name text,
             email text,
-            password text);");
+            password text,
+            description text,
+            members text,
+            image1 text,
+            image2 text);");
 
 
 

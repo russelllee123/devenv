@@ -22,8 +22,17 @@ class matchgroupsController {
     public function run() {
         // Get the command
         $command = "welcome";
-        if (isset($this->input["command"]))
+        if (isset($this->input["command"])){
             $command = $this->input["command"];
+        }   
+
+        $possibilities = array("displayLogin", "displayCreateAccount", "login", "createAccount");
+        if (!in_array($command, $possibilities) and !isset($_SESSION["email"])){
+            $command = "welcome";
+        }
+        if(($command == "login" or $command == "createAccount")  and !isset($_POST["email"])){
+            $command = "welcome";
+        }
 
         switch($command) {
             case "login":
@@ -33,9 +42,11 @@ class matchgroupsController {
                 $this->createAccount();
                 break;
             case "displayLogin":
+                $this->logout();
                 $this->displayLogin();
                 break;
             case "displayCreateAccount":
+                $this->logout();
                 $this->displayCreateAccount();
                 break;
             case "stack":
@@ -53,6 +64,7 @@ class matchgroupsController {
             case "logout":
                 $this->logout();
             default:
+                $this->logout();
                 $this->displayWelcome();
                 break;
         }
@@ -117,9 +129,10 @@ class matchgroupsController {
                 $this->displayCreateAccount("Passwords don't match");
                 return;
             }
-            $this->db->query("insert into users (name, email, password) values ($1, $2, $3);",
+            $this->db->query("insert into users (name, email, password, description, 
+                members, image1, image2) values ($1, $2, $3, $4, $5, $6, $7);",
                 $_POST["name"], $_POST["email"], 
-                password_hash($_POST["passwd"], PASSWORD_DEFAULT));
+                password_hash($_POST["passwd"], PASSWORD_DEFAULT), "", "", "", "");
             $_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
             $this->displayProfile();
@@ -130,6 +143,32 @@ class matchgroupsController {
         }
         // If something went wrong, show the welcome page again
         $this->displayWelcome();
+    }
+
+    public function displayStack(){
+
+        $res = $this->db->query("select * from users where name <> $1 order by random();", $_SESSION["name"]);
+        if(sizeof($res) == 0){
+            include("templates/emptyStack.php");
+        }
+        // if user in matches
+        //  call displayStack()
+        else {
+            $potential_match = $res[0];
+            
+
+            $name = $potential_match["name"];
+            $description = $potential_match["description"];
+            $members = $potential_match["members"];
+            $image1 = $potential_match["image1"];
+            $image2 = $potential_match["image2"];
+            include("templates/stack.php");
+        }
+    }
+    public function logout() {
+        session_destroy();
+
+        session_start();
     }
 
 }
