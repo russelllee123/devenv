@@ -195,8 +195,22 @@ class matchgroupsController {
             the ability to like and dislike other users, remove those users from the stack
         */
         
-        $res = $this->db->query("select * from users where email != $1 order 
-            by random() limit 1;", $_SESSION["email"]);
+        $res = $this->db->query("select * from users where id != $1 order 
+            by random();", $_SESSION["id"]);
+        $likes_tmp = $this->db->query("select * from likes where requestor = $1;", $_SESSION["id"]);
+        $dislikes_tmp = $this->db->query("select * from dislikes where requestor = $1;", $_SESSION["id"]);
+        $remove = [];
+        foreach ($likes_tmp as $key) {
+            $remove[$key["reciever"]] = "";
+        }
+        foreach ($dislikes_tmp as $key) {
+            $remove[$key["reciever"]] = "";
+        }
+        foreach ($res as $key => $value) {
+            if (array_key_exists($value["id"], $remove)) {
+                unset($res[$key]);
+            }
+        }
         if(sizeof($res) == 0){
             include("templates/emptyStack.php");
         }
