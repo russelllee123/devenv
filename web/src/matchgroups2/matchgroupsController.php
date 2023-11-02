@@ -52,6 +52,8 @@ class matchgroupsController {
             case "stack":
                 $this->displayStack();
                 break;
+            case "updateProfile":
+                $this->updateProfile();
             case "profile":
                 $this->displayProfile();
                 break;
@@ -146,14 +148,29 @@ class matchgroupsController {
     }
 
     public function displayProfile(){
-        $res = $this->db->query("select name, description, members, image1, image2 from users where name = $1;", $_SESSION["name"]);
+        $res = $this->db->query("select * from users where email = $1;", $_SESSION["email"]);
 
-        $name = $res["name"];
-        $description = $res["description"];
-        $members = $res["members"];
-        $image1 = $res["image1"];
-        $image2 = $res["image2"];
+        $name = $res[0]["name"];
+        $description = $res[0]["description"];
+        $members = $res[0]["members"];
+        $image1 = $res[0]["image1"];
+        $image2 = $res[0]["image2"];
         include("templates/profile.php");
+    }
+
+    public function updateProfile() {
+        if(isset($_POST["description"]) && !empty($_POST["description"])) {
+            $this->db->query("update users set description = $1 where email = $2;", $_POST["description"], $_SESSION["email"]);
+        }
+        if(isset($_POST["members"]) && !empty($_POST["members"])) {
+            $this->db->query("update users set members = $1 where email = $2;", $_POST["members"], $_SESSION["email"]);
+        }
+        if(isset($_POST["image1"]) && !empty($_POST["image1"])) {
+            $this->db->query("update users set image1 = $1 where email = $2;", $_POST["image1"], $_SESSION["email"]);
+        }
+        if(isset($_POST["image2"]) && !empty($_POST["image2"])) {
+            $this->db->query("update users set image2 = $1 where email = $2;", $_SESSION["image2"], $_SESSION["email"]);
+        }
     }
 
     public function displayStack(){
@@ -175,9 +192,13 @@ class matchgroupsController {
             include("templates/stack.php");
         }
     }
+
+    public function displayMatches() {
+        include "templates/matches.php";
+    }
+
     public function logout() {
         session_destroy();
-
         session_start();
     }
 

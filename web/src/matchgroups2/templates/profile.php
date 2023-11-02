@@ -18,7 +18,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"  crossorigin="anonymous">
 
-        <link rel="stylesheet" href="../styles/main.css">
+        <link rel="stylesheet" href="/matchgroups2/styles/main.css">
 
         <title>Profile</title>     
     </head>  
@@ -28,25 +28,25 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
     <body>
         <nav class="navbar navbar-expand-lg bg-body-secondary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="../home">MatchGroups</a>
+              <a class="navbar-brand" href="?command=stack">MatchGroups</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" href="../home">Stack </a>
+                    <a class="nav-link active" href="?command=stack">Stack </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../matches">Matches </a>
+                    <a class="nav-link" href="?command=matches">Matches </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Profile </a>
+                    <a class="nav-link" aria-current="page" href="?command=profile">Profile </a>
                   </li>
                 </ul>
                 <ul class="navbar-nav pull-right">
                     <li class="nav-item">
-                      <a class="nav-link" href="../login">Log Out</a>
+                      <a class="nav-link" href="?command=logout">Log Out</a>
                     </li>
                   </ul>
               </div>
@@ -59,19 +59,19 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <h1 class="display-6">Update your profile: <?=$name?></h1> <br>
           </div>
           
-          <form action="../profile">
+          <form action="?command=updateProfile" method="post">
           
             <div class="invisible-box text-box">
                 <div class="form-group input-box">
                   <label for="description">Group Description:</label>
-                  <textarea class="form-control" id="description" rows = 4 placeholder=<?=$description?>></textarea>
+                  <textarea class="form-control" id="description" name="description" rows = 4 placeholder=<?=$description?>></textarea>
                 </div>
             </div>
 
             <div class="invisible-box text-box">
               <div class="form-group input-box">
                 <label for="members">Group Members:</label>
-                <textarea class="form-control" id="members" rows = 3 placeholder=><?=$members?></textarea>
+                <textarea class="form-control" id="members" name="members" rows = 3 placeholder=><?=$members?></textarea>
               </div>
             </div>
 
@@ -85,7 +85,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <div class="invisible-box text-box">
               <div class="mb-3">
                 <label for="image1" class="form-label">Profile Photo:</label>
-                <input class="form-control" type="file" id="image1">
+                <input class="form-control" type="file" id="image1" name="image1">
               </div>
             </div>
 
@@ -100,7 +100,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <div class="invisible-box text-box">
               <div class="mb-3">
                 <label for="image2" class="form-label">Second photo:</label>
-                <input class="form-control" type="file" id="image2">
+                <input class="form-control" type="file" id="image2" name="image2">
               </div>
             </div>
 

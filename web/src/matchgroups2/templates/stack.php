@@ -18,7 +18,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"  crossorigin="anonymous">
 
-        <link rel="stylesheet" href="../styles/main.css">
+        <link rel="stylesheet" href="/matchgroups2/styles/main.css">
 
         <title>Home</title>     
     </head>  
@@ -28,25 +28,25 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
     <body>
         <nav class="navbar navbar-expand-lg bg-body-secondary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">MatchGroups</a>
+              <a class="navbar-brand" href="?command=stack">MatchGroups</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Stack </a>
+                    <a class="nav-link active" aria-current="page" href="?command=stack">Stack </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../matches">Matches </a>
+                    <a class="nav-link" href="?command=matches">Matches </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../profile">Profile </a>
+                    <a class="nav-link" href="?command=profile">Profile </a>
                   </li>
                 </ul>
                 <ul class="navbar-nav pull-right">
                     <li class="nav-item">
-                      <a class="nav-link" href="../login">Log Out</a>
+                      <a class="nav-link" href="?command=logout">Log Out</a>
                     </li>
                   </ul>
               </div>
