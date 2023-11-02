@@ -195,16 +195,15 @@ class matchgroupsController {
             the ability to like and dislike other users, remove those users from the stack
         */
         
-        $res = $this->db->query("select * from users where id != $1 order 
-            by random();", $_SESSION["id"]);
+        $res = $this->db->query("select * from users where id != $1 order by random();", $_SESSION["id"]);
         $likes_tmp = $this->db->query("select * from likes where requestor = $1;", $_SESSION["id"]);
         $dislikes_tmp = $this->db->query("select * from dislikes where requestor = $1;", $_SESSION["id"]);
         $remove = [];
-        foreach ($likes_tmp as $key) {
-            $remove[$key["reciever"]] = "";
+        foreach ($likes_tmp as $value) {
+            $remove[$value["reciever"]] = "";
         }
-        foreach ($dislikes_tmp as $key) {
-            $remove[$key["reciever"]] = "";
+        foreach ($dislikes_tmp as $value) {
+            $remove[$value["reciever"]] = "";
         }
         foreach ($res as $key => $value) {
             if (array_key_exists($value["id"], $remove)) {
@@ -215,7 +214,7 @@ class matchgroupsController {
             include("templates/emptyStack.php");
         }
         else {
-            $potential_match = $res[0];
+            $potential_match = reset($res);
 
             $_SESSION["potentialMatch"] = $potential_match["id"]; 
             
@@ -239,12 +238,9 @@ class matchgroupsController {
             if (empty($res) == false) {
                 return;
             }
-
             // Add potential match to user's liked users
             $this->db->query("insert into likes (requestor, reciever) values ($1, $2);",
             $_SESSION["id"], $_SESSION["potentialMatch"]);
-
-            echo "like: ". $_SESSION["potentialMatch"];
         }
     }
 
@@ -259,24 +255,31 @@ class matchgroupsController {
             if (empty($res) == false) {
                 return;
             }
-
             // Add potential match to user's disliked users
             $this->db->query("insert into dislikes (requestor, reciever) values ($1, $2);",
             $_SESSION["id"], $_SESSION["potentialMatch"]);
-
-            echo "dislike: " . $_SESSION["potentialMatch"];
         }
     }
 
     public function displayMatches() {
-        // Pass an associative array of matches or something to that effect
-
-        $res = $this->db->query("select * from likes where requestor = $1", $_SESSION["id"]);
-        echo "Likes: ";
-        print_r($res);
-        $res = $this->db->query("select * from dislikes where requestor = $1", $_SESSION["id"]);
-        echo "Dislikes: ";
-        print_r($res);
+        // Create and pass an associative array of reciprocal likes
+        $likes = $this->db->query("select * from likes where requestor = $1;", $_SESSION["id"]);
+        $reciprocal_likes_tmp = $this->db->query("select * from likes where reciever = $1;", $_SESSION["id"]);
+        $reciprocal_likes = [];
+        foreach ($reciprocal_likes_tmp as $value) {
+            $reciprocal_likes[$value["requestor"]] = "";
+        }
+        foreach ($likes as $key => $value) {
+            if (!array_key_exists($value["reciever"], $reciprocal_likes)) {
+                unset($likes[$key]);
+            }
+        }
+        
+        $matches = [];
+        foreach ($likes as $value) {
+            $res = $this->db->query("select * from users where id = $1;", $value["reciever"]);
+            array_push($matches, $res[0]);
+        }
 
         include "templates/matches.php";
     }

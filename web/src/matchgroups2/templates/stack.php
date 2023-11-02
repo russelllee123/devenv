@@ -61,20 +61,23 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
           <?php if ($image1 !== ""){ ?>
           <div class="box contain-image">
-            <img src="../images/<?=$image1?>" alt="Team of frisbee players">
+            <?=$image1?>
+            <!-- <img src="../images/<?=$image1?>" alt="Team of frisbee players"> -->
           </div>
           <?php } ?>
           
           <?php if ($description !== ""){ ?>
-          <div class="box text-box">
-            <p> <?=$description?>
-            </p>
-          </div>
+
+            <div class="invisible-box text-box">
+                <h1 class="display-6">No Possible Matches</h1> <br>
+            </div>
+          
           <?php } ?>
 
           <?php if ($image2 !== ""){ ?>
           <div class="box contain-image">
-            <img src="../images/<?=$image2?>" alt="Team of frisbee players">
+            <?=$image2?>
+            <!-- <img src="../images/<?=$image2?>" alt="Team of frisbee players"> -->
           </div>
           <?php } ?>
 

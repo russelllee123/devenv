@@ -61,49 +61,32 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
           <br>
 
-          <a href="uva-football-team" class="text-reset text-decoration-none">
-            <div class="invisible-box">
-              <div class="profile-image">
-                <img src="../images/football.jpeg" alt="Football team logo">
-              </div>
-              <div class="full-box text-box">
-                <p>UVA Football Team</p>
-              </div>
-            </div>
-          </a>
+          
 
-          <a href="#" class="text-reset text-decoration-none">
-            <div class="invisible-box">
-              <div class="profile-image">
-                <img src="../images/tridelt.jpeg" alt="Tridelta logo">
-              </div>
-              <div class="full-box text-box">
-                <p>Delta Delta Delta</p>
-              </div>
-            </div>
-          </a>
+          <?php if (empty($matches)){ ?>
+          <div class="box text-box">
+            <p> <?=$description?>
+            </p>
+          </div>
+          <?php } else {
 
-          <a href="#" class="text-reset text-decoration-none">
-            <div class="invisible-box">
-              <div class="profile-image">
-                <img src="../images/outdoor.png" alt="Outdoor club logo">
-              </div>
-              <div class="full-box text-box">
-                <p>Outdoors Club</p>
-              </div>
-            </div>
-          </a>
+            foreach ($matches as $match) {
+                ?>
 
-          <a href="#" class="text-reset text-decoration-none">
-            <div class="invisible-box">
-              <div class="profile-image">
-                <img src="../images/friends.jpeg" alt="Friends laughing">
-              </div>
-              <div class="full-box text-box">
-                <p>First Year Friends!</p>
-              </div>
-            </div>
-          </a>
+                <a href="?command=match" class="text-reset text-decoration-none">
+                    <div class="invisible-box">
+                    <div class="profile-image">
+                        <img src="../images/football.jpeg" alt="Football team logo">
+                    </div>
+                    <div class="full-box text-box">
+                        <p><?=$match["name"]?></p>
+                    </div>
+                    </div>
+                </a>
+
+                <?php 
+            }
+          } ?>
 
           <div class="d-flex flex-column">
             <div class="wrapper flex-grow-1"></div>
