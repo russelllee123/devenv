@@ -58,6 +58,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <div class="invisible-box text-box">
             <h1 class="display-6"><?=$name?></h1> <br>
           </div>
+          
 
           <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>
             <div class="box contain-image">
@@ -93,18 +94,17 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <div class="column">
                 <br>
             </div>
-            <?php foreach($messages as $message): 
+            <?php foreach($messages as $message) {
               if ($message["sender"] === $idMine){?>
-                  <div class="column d-flex flex-row justify-content-end mb-4 pt-1">
+                  <div class="column d-flex flex-row justify-content-end">
                     <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"><?php echo $message["message"];?></p>
                 </div>
-               <?php } ?>
-               <?php if ($message["sender"] === $id){ ?>
+               <?php } else { ?>
                   <div class="column d-flex flex-row justify-content-start">
                     <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"><?php echo $message["message"];?></p>
                   </div>
                <?php } ?>
-            <?php endforeach ?>
+            <?php } ?>
             <div class="column">
                 <br>
             </div>

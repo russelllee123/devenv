@@ -58,6 +58,16 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <div class="invisible-box text-box">
             <h1 class="display-6">Update your profile: <?=$name?></h1> <br>
           </div>
+
+          <div class="invisible-box text-box">
+            <?php 
+              if ($message != "") {
+                echo "<br><div class=\"alert alert-danger\" role=\"alert\">
+                        $message
+                      </div><br>";
+              }
+            ?>
+          </div>
           
           <form action="?command=updateDescription" method="post" >
           
