@@ -59,55 +59,77 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <h1 class="display-6">Update your profile: <?=$name?></h1> <br>
           </div>
           
-          <form action="?command=updateProfile" method="post">
+          <form action="?command=updateDescription" method="post" >
           
             <div class="invisible-box text-box">
                 <div class="form-group input-box">
                   <label for="description">Group Description:</label>
-                  <textarea class="form-control" id="description" name="description" rows = 4 placeholder=<?=$description?>></textarea>
+                  <textarea class="form-control" id="description" name="description" rows = 4><?=$description?></textarea>
                 </div>
             </div>
 
             <div class="invisible-box text-box">
-              <div class="form-group input-box">
-                <label for="members">Group Members:</label>
-                <textarea class="form-control" id="members" name="members" rows = 3 placeholder=><?=$members?></textarea>
-              </div>
+              <button type="submit" class="btn btn-primary">Update Description</button>
             </div>
+          </form>
 
-            <br>
-            <?php if ($image1 !== "") { ?>
-              <div class="box contain-image">
-                <img src=<?=$image1?> alt="">  
-              </div>
-            <?php } ?>
+          <form action="?command=updateMembers" method="post" >
 
             <div class="invisible-box text-box">
+              <div class="form-group input-box">
+                <label for="members">Group Members:</label>
+                <textarea class="form-control" id="members" name="members" rows = 3 ><?=$members?></textarea>
+              </div>
+            </div>
+          
+            <div class="invisible-box text-box">
+              <button type="submit" class="btn btn-primary">Update Members</button>
+            </div>
+          </form>
+
+          <br>
+          <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>
+            <div class="box contain-image">
+              <img src=<?php echo $imageURL; ?> alt="">  
+            </div>
+          <?php } ?>
+
+          <form action="?command=updatePhoto" method="post" enctype="multipart/form-data">
+
+          <div class="invisible-box text-box">
               <div class="mb-3">
-                <label for="image1" class="form-label">Profile Photo:</label>
+                <label for="image1" class="form-label">First Photo:</label>
                 <input class="form-control" type="file" id="image1" name="image1">
               </div>
             </div>
 
-            <br>
-            <?php if ($image2 !== "") { ?>
-              <div class="box contain-image">
-                <img src=<?=$image2?> alt="">  
-              </div>
-            <?php } ?>
+            <div class="invisible-box text-box">
+              <input type="submit" name="submit" value="Upload">
+            </div>
+          </form>
 
+            <br>
+            <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
+            <div class="box contain-image">
+              <img src=<?php echo $imageURL; ?> alt="">  
+            </div>
+          <?php } ?>
+
+          <form action="?command=updatePhoto2" method="post" enctype="multipart/form-data">
 
             <div class="invisible-box text-box">
               <div class="mb-3">
-                <label for="image2" class="form-label">Second photo:</label>
+                <label for="image2" class="form-label">Second Photo:</label>
                 <input class="form-control" type="file" id="image2" name="image2">
               </div>
             </div>
 
             <div class="invisible-box text-box">
-              <button type="submit" class="btn btn-primary">Update</button>
+              <input type="submit" name="submit" value="Upload">
             </div>
           </form>
+
+
 
 
           <div class="d-flex flex-column">
