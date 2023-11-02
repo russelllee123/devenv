@@ -52,6 +52,18 @@ class matchgroupsController {
             case "stack":
                 $this->displayStack();
                 break;
+            case "updateDescription":
+                $this->updateDescription();
+                break;
+            case "updateMembers":
+                $this->updateMembers();
+                break;
+            case "updatePhoto":
+                $this->updatePhoto();
+                break;
+            case "updatePhoto2":
+                $this->updatePhoto2();
+                break;
             case "updateProfile":
                 $this->updateProfile();
             case "profile":
@@ -173,19 +185,80 @@ class matchgroupsController {
         include("templates/profile.php");
     }
 
-    public function updateProfile() {
+    public function updateDescription() {
         if(isset($_POST["description"]) && !empty($_POST["description"])) {
             $this->db->query("update users set description = $1 where email = $2;", $_POST["description"], $_SESSION["email"]);
         }
+        $this->displayProfile();
+    }
+    public function updateMembers(){
         if(isset($_POST["members"]) && !empty($_POST["members"])) {
             $this->db->query("update users set members = $1 where email = $2;", $_POST["members"], $_SESSION["email"]);
         }
-        if(isset($_POST["image1"]) && !empty($_POST["image1"])) {
-            $this->db->query("update users set image1 = $1 where email = $2;", $_POST["image1"], $_SESSION["email"]);
-        }
-        if(isset($_POST["image2"]) && !empty($_POST["image2"])) {
-            $this->db->query("update users set image2 = $1 where email = $2;", $_SESSION["image2"], $_SESSION["email"]);
-        }
+        $this->displayProfile();;
+    }
+
+    public function updatePhoto(){
+        
+        $statusMsg = "";
+        $targetDir = "images/"; 
+        if(isset($_POST["submit"])){ 
+            if(!empty($_FILES["image1"]["name"])){ 
+                $fileName = basename($_FILES["image1"]["name"]); 
+                $targetFilePath = $targetDir . $fileName; 
+                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
+     
+                $types = array('jpg','png','jpeg'); 
+                if(in_array($fileType, $types)){ 
+            // Upload file to server 
+                    if(move_uploaded_file($_FILES["image1"]["tmp_name"], $targetFilePath)){ 
+                // Insert image file name into database 
+                        $this->db->query("update users set image1 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
+                    }
+                    else{ 
+                        $statusMsg = "Upload failed 2"; 
+                    } 
+                }
+                else{ 
+                    $statusMsg = 'Must be a JPG, JPEG, or PNG.'; 
+                } 
+            }
+            else{ 
+                $statusMsg = 'Please select a file to upload.'; 
+            } 
+        } 
+        $this->displayProfile();
+    }
+    public function updatePhoto2(){
+        
+        $statusMsg = "";
+        $targetDir = "images/"; 
+        if(isset($_POST["submit"])){ 
+            if(!empty($_FILES["image2"]["name"])){ 
+                $fileName = basename($_FILES["image2"]["name"]); 
+                $targetFilePath = $targetDir . $fileName; 
+                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
+     
+                $types = array('jpg','png','jpeg'); 
+                if(in_array($fileType, $types)){ 
+            // Upload file to server 
+                    if(move_uploaded_file($_FILES["image2"]["tmp_name"], $targetFilePath)){ 
+                // Insert image file name into database 
+                        $this->db->query("update users set image2 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
+                    }
+                    else{ 
+                        $statusMsg = "Upload failed 2"; 
+                    } 
+                }
+                else{ 
+                    $statusMsg = 'Must be a JPG, JPEG, or PNG.'; 
+                } 
+            }
+            else{ 
+                $statusMsg = 'Please select a file to upload.'; 
+            } 
+        } 
+        $this->displayProfile();
     }
 
     public function displayStack(){
