@@ -15,19 +15,15 @@
     }
 
     // Drop tables and sequences
-    $res  = pg_query($dbHandle, "drop sequence if exists like_seq;");
-    $res  = pg_query($dbHandle, "drop table if exists like;");
-    $res  = pg_query($dbHandle, "drop sequence if exists dislike_seq;");
-    $res  = pg_query($dbHandle, "drop table if exists dislike;");
-
     $res  = pg_query($dbHandle, "drop sequence if exists user_seq;");
     $res  = pg_query($dbHandle, "drop table if exists users;");
     $res  = pg_query($dbHandle, "drop sequence if exists likes_seq;");
     $res  = pg_query($dbHandle, "drop table if exists likes;");
     $res  = pg_query($dbHandle, "drop sequence if exists dislikes_seq;");
     $res  = pg_query($dbHandle, "drop table if exists dislikes;");
+    $res  = pg_query($dbHandle, "drop sequence if exists messages_seq;");
+    $res  = pg_query($dbHandle, "drop table if exists messages;");
 
-    // Create sequences
     $res  = pg_query($dbHandle, "create sequence user_seq;");
 
     $res  = pg_query($dbHandle, "create table users (
@@ -53,5 +49,14 @@
             id  int primary key default nextval('dislikes_seq'),
             requestor int REFERENCES users(id),
             reciever int REFERENCES users(id));");
+    
+    $res  = pg_query($dbHandle, "create sequence messages_seq;");
+
+    $res = pg_query($dbHandle, "create table messages (
+            id  int primary key default nextval('messages_seq'),
+            sender int REFERENCES users(id),
+            recipient int REFERENCES users(id),
+            message text,
+            time timestamp);");
 
 
