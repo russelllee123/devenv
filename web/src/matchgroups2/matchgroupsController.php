@@ -145,6 +145,17 @@ class matchgroupsController {
         $this->displayWelcome();
     }
 
+    public function displayProfile(){
+        $res = $this->db->query("select name, description, members, image1, image2 from users where name = $1;", $_SESSION["name"]);
+
+        $name = $res["name"];
+        $description = $res["description"];
+        $members = $res["members"];
+        $image1 = $res["image1"];
+        $image2 = $res["image2"];
+        include("templates/profile.php");
+    }
+
     public function displayStack(){
 
         $res = $this->db->query("select * from users where name <> $1 order by random();", $_SESSION["name"]);
@@ -156,7 +167,6 @@ class matchgroupsController {
         else {
             $potential_match = $res[0];
             
-
             $name = $potential_match["name"];
             $description = $potential_match["description"];
             $members = $potential_match["members"];

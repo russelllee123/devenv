@@ -56,36 +56,31 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <br>
 
           <div class="invisible-box text-box">
-            <h1 class="display-6">Update your profile:</h1> <br>
+            <h1 class="display-6">Update your profile: <?=$name?></h1> <br>
           </div>
           
           <form action="../profile">
-            <div class="invisible-box text-box">
-              <div class="form-group input-box">
-                <label for="name">Group Name:</label>
-                <input type="email" class="form-control" id="name" placeholder="Swing Dance">
-              </div>
-            </div>
           
             <div class="invisible-box text-box">
                 <div class="form-group input-box">
                   <label for="description">Group Description:</label>
-                  <textarea class="form-control" id="description" rows = 4 placeholder="The University of Virginia's foremost swing dance club and team. We hold biweekly socials and compete once a semester."></textarea>
+                  <textarea class="form-control" id="description" rows = 4 placeholder=<?=$description?>></textarea>
                 </div>
             </div>
 
             <div class="invisible-box text-box">
               <div class="form-group input-box">
                 <label for="members">Group Members:</label>
-                <textarea class="form-control" id="members" rows = 3 placeholder="Katie Foster, Amy Beauchamp, Sarah Lewis, Rand Goshen, Paul Vaguely "></textarea>
+                <textarea class="form-control" id="members" rows = 3 placeholder=><?=$members?></textarea>
               </div>
             </div>
 
             <br>
-
-            <div class="box contain-image">
-              <img src="../images/swingDanceMany.jpg" alt="Team of frisbee players">
-            </div>
+            <?php if ($image1 !== "") { ?>
+              <div class="box contain-image">
+                <img src=<?=$image1?> alt="">  
+              </div>
+            <?php } ?>
 
             <div class="invisible-box text-box">
               <div class="mb-3">
@@ -95,10 +90,12 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
 
             <br>
+            <?php if ($image2 !== "") { ?>
+              <div class="box contain-image">
+                <img src=<?=$image2?> alt="">  
+              </div>
+            <?php } ?>
 
-            <div class="box contain-image">
-              <img src="../images/swingDanceFew.jpg" alt="Team of frisbee players">
-            </div>
 
             <div class="invisible-box text-box">
               <div class="mb-3">
