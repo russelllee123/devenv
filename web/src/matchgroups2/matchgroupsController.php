@@ -140,6 +140,13 @@ class matchgroupsController {
         $this->displayWelcome();
     }
 
+    function validateEmail($email) {
+        $baseline = "/^[a-zA-Z0-9+_\-]+(|[a-zA-Z0-9+_.\-]*[a-zA-Z0-9+_\-]+)@[a-zA-Z0-9]+[a-zA-Z0-9.\-]*\.[a-zA-Z0-9.\-]*[a-zA-Z0-9]+$/";
+        if (preg_match($baseline, $email) == 0)
+            return false;
+        return true; 
+    }
+    
     public function createAccount() {
         // need a name, email, and password
         if(isset($_POST["name"]) && !empty($_POST["name"]) &&
@@ -147,6 +154,10 @@ class matchgroupsController {
         isset($_POST["passwd"]) && !empty($_POST["passwd"]) &&
         isset($_POST["passwd2"]) && !empty($_POST["passwd2"])) {
             // Check if user is already in database
+            if(!$this->validateEmail($_POST["email"])){
+                $this->displayCreateAccount("Invalid Email Format");
+                return;
+            }
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
             if (empty($res) == false) {
                 $this->displayCreateAccount("User already exists");
@@ -220,17 +231,8 @@ class matchgroupsController {
                 // Insert image file name into database 
                         $this->db->query("update users set image1 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
                     }
-                    else{ 
-                        $statusMsg = "Upload failed 2"; 
-                    } 
                 }
-                else{ 
-                    $statusMsg = 'Must be a JPG, JPEG, or PNG.'; 
-                } 
             }
-            else{ 
-                $statusMsg = 'Please select a file to upload.'; 
-            } 
         } 
         $this->displayProfile();
     }
@@ -252,18 +254,9 @@ class matchgroupsController {
                 // Insert image file name into database 
                         $this->db->query("update users set image2 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
                     }
-                    else{ 
-                        $statusMsg = "Upload failed 2"; 
-                    } 
                 }
-                else{ 
-                    $statusMsg = 'Must be a JPG, JPEG, or PNG.'; 
-                } 
             }
-            else{ 
-                $statusMsg = 'Please select a file to upload.'; 
-            } 
-        } 
+        }
         $this->displayProfile();
     }
 
