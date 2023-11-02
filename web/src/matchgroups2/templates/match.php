@@ -59,12 +59,11 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <h1 class="display-6"><?=$name?></h1> <br>
           </div>
 
-          <?php if ($image1 != "") {?>
+          <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>
             <div class="box contain-image">
-              <p><?=$image1?></p>
-              <!-- <img src="../../images/football.jpeg"> -->
+              <img src=<?php echo $imageURL; ?> alt="">  
             </div>
-          <?php }?>
+          <?php } ?>
           
           <?php if ($description != "") {?>
             <div class="box text-box">
@@ -72,12 +71,11 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
           <?php }?>
 
-          <?php if ($image2 != "") {?>
+          <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
             <div class="box contain-image">
-              <p><?=$image2?></p>
-              <!-- <img src="../../images/football-player.jpeg"> -->
+              <img src=<?php echo $imageURL; ?> alt="">  
             </div>
-          <?php }?>
+          <?php } ?>
 
           <?php if ($members != "") {?>
             <div class="box text-box">

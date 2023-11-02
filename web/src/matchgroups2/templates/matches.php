@@ -75,9 +75,13 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
                 
                 ?>
                     <div class="invisible-box">
-                        <div class="profile-image">
-                            <img src="../images/football.jpeg" alt="Football team logo">
-                        </div>
+
+                        <?php if ($match["image1"] !== "") { $imageURL = 'images/'. $match["image1"]; ?>
+                            <div class="profile-image">
+                                <img src=<?php echo $imageURL; ?> alt="">  
+                            </div>
+                        <?php } ?>
+
                         <div class="full-box text-box">
                             <h6><?=$match["name"]?>   </h6>
                             <h5>   <h5>
