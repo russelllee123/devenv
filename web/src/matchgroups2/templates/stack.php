@@ -55,43 +55,54 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
           <br>
 
-          <div class="invisible-box text-box">
-            <h1 class="display-6"><?=$name?></h1> <br>
-          </div>
-
-          <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>
-            <div class="box contain-image">
-              <img src=<?php echo $imageURL; ?> alt="">  
+          <?php if ($name === ""){ ?>
+            <br>
+            <div class="invisible-box text-box">
+                <h1 class="display-6">No possible matches</h1>
             </div>
-          <?php } ?>
-          
-          <?php if ($description !== ""){ ?>
+            <br>
+          <?php } else { ?>
+
+            <div class="invisible-box text-box">
+                <h1 class="display-6"><?=$name?></h1> <br>
+            </div>
+
+            <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>
+                <div class="box contain-image">
+                <img src=<?php echo $imageURL; ?> alt="">  
+                </div>
+            <?php } ?>
+            
+            <?php if ($description !== ""){ ?>
+                <div class="box text-box">
+                    <p>Description: <?=$description?></p>
+                </div>
+            <?php } ?>
+
+            <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
+                <div class="box contain-image">
+                <img src=<?php echo $imageURL; ?> alt="">  
+                </div>
+            <?php } ?>
+
+            <?php if ($members !== ""){ ?>
             <div class="box text-box">
-                <p>Description: <?=$description?></p>
+                <p>Members: <?=$members?></p>
             </div>
+            <?php } ?>
+
+
+            <div class="box contain-two-images">
+                <div class="half-box">
+                <a href="?command=like"><img src="/matchgroups2/images/thumbs-up.jpg" class="align-left" alt="Thumbs-up"></a>
+                </div>
+                <div class="half-box">
+                <a href="?command=dislike"><img src="/matchgroups2/images/thumbs-down.jpg" class="align-right" alt="Thumbs-down"></a>
+                </div>
+            </div>
+
           <?php } ?>
 
-          <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
-            <div class="box contain-image">
-              <img src=<?php echo $imageURL; ?> alt="">  
-            </div>
-          <?php } ?>
-
-          <?php if ($members !== ""){ ?>
-          <div class="box text-box">
-            <p>Members: <?=$members?></p>
-          </div>
-          <?php } ?>
-
-
-          <div class="box contain-two-images">
-            <div class="half-box">
-              <a href="?command=like"><img src="/matchgroups2/images/thumbs-up.jpg" class="align-left" alt="Thumbs-up"></a>
-            </div>
-            <div class="half-box">
-              <a href="?command=dislike"><img src="/matchgroups2/images/thumbs-down.jpg" class="align-right" alt="Thumbs-down"></a>
-            </div>
-          </div>
           <div class="d-flex flex-column">
             <div class="wrapper flex-grow-1"></div>
             <div class="container">

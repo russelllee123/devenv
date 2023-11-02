@@ -35,13 +35,13 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" href="?command=stack">Stack </a>
+                    <a class="nav-link" href="?command=stack">Stack </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?command=matches">Matches </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?command=profile">Profile </a>
+                    <a class="nav-link active" aria-current="page" href="?command=profile">Profile </a>
                   </li>
                 </ul>
                 <ul class="navbar-nav pull-right">
@@ -109,7 +109,8 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           </form>
 
             <br>
-            <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
+            
+          <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
             <div class="box contain-image">
               <img src=<?php echo $imageURL; ?> alt="">  
             </div>

@@ -35,10 +35,10 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" href="?command=stack">Stack </a>
+                    <a class="nav-link" href="?command=stack">Stack </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?command=matches">Matches </a>
+                    <a class="nav-link active" aria-current="page" href="?command=matches">Matches </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?command=profile">Profile </a>
@@ -107,14 +107,15 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
           </div>
 
-            <form action="#">
+            <form action="?command=sendMessage" method="post">
+                <input type="hidden" name="matchID" value=<?=$id?> />
                 <div class="invisible-box text-box">
-                    <div class="form-group input-box">
-                    <input type="email" class="form-control" id="name" placeholder="Write messages here...">
-                    </div>
+                  <div class="form-group input-box">
+                    <input class="form-control" id="message" name="message" placeholder="Write messages here...">
+                  </div>
                 </div>
                 <div class="invisible-box text-box">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </div>
             </form>
 

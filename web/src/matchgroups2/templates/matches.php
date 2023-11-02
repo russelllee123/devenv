@@ -35,10 +35,10 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" href="?command=stack">Stack </a>
+                    <a class="nav-link" href="?command=stack">Stack </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?command=matches">Matches </a>
+                    <a class="nav-link active" aria-current="page" href="?command=matches">Matches </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?command=profile">Profile </a>
@@ -60,9 +60,8 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
                 <h1 class="display-6">No matches available</h1>
             </div>
             <br>
-          <?php } else {
+          <?php } else { ?>
 
-            ?>
                 <br>
                 <div class="invisible-box text-box">
                     <h1 class="display-6">Your matches!</h1>
@@ -83,8 +82,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
                         <?php } ?>
 
                         <div class="full-box text-box">
-                            <h6><?=$match["name"]?>   </h6>
-                            <h5>   <h5>
+                            <h6><?=$match["name"]?>&nbsp;&nbsp;</h6>
                             <form action="?command=match" method="post">
                                 <input type="hidden" name="matchID" value=<?=$match["id"]?> />
                                 <button type="submit" class="btn btn-primary">Check Them Out</button>

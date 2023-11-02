@@ -83,6 +83,10 @@ class matchgroupsController {
                 $this->dislikeUser();
                 $this->displayStack();
                 break;
+            case "sendMessage":
+                $this->sendMessage();
+                $this->displayMatch();
+                break;
             case "logout":
                 $this->logout();
             default:
@@ -191,6 +195,7 @@ class matchgroupsController {
         }
         $this->displayProfile();
     }
+
     public function updateMembers(){
         if(isset($_POST["members"]) && !empty($_POST["members"])) {
             $this->db->query("update users set members = $1 where email = $2;", $_POST["members"], $_SESSION["email"]);
@@ -229,6 +234,7 @@ class matchgroupsController {
         } 
         $this->displayProfile();
     }
+
     public function updatePhoto2(){
         
         $statusMsg = "";
@@ -284,9 +290,11 @@ class matchgroupsController {
             }
         }
         if(sizeof($res) == 0){
-            include("templates/emptyStack.php");
+            $name = "";
+            include("templates/stack.php");
         }
         else {
+
             $potential_match = reset($res);
 
             $_SESSION["potentialMatch"] = $potential_match["id"]; 
@@ -366,6 +374,7 @@ class matchgroupsController {
 
             $match = $res[0];
 
+            $id = $match["id"];
             $name = $match["name"];
             $description = $match["description"];
             $members = $match["members"];
@@ -375,6 +384,14 @@ class matchgroupsController {
             include "templates/match.php";
         } else {
             $this->displayMatches();
+        }
+    }
+
+    public function sendMessage() {
+        if (isset($_POST["matchID"]) && isset($_POST["message"])) {
+            if (!empty($_POST["message"])) {
+                echo "message recieved";
+            }
         }
     }
 
