@@ -53,25 +53,26 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
         </nav>
 
-          <br>
-
-          <div class="invisible-box text-box">
-            <h1 class="display-6">Your matches!</h1>
-          </div>
-
-          <br>
-
           
-
           <?php if (empty($matches)){ ?>
-          <div class="box text-box">
-                <div class="invisible-box text-box">
-                    <h1 class="display-6">No Possible Matches</h1> <br>
-                </div>
-          </div>
+            <br>
+            <div class="invisible-box text-box">
+                <h1 class="display-6">No matches available</h1>
+            </div>
+            <br>
           <?php } else {
 
+            ?>
+                <br>
+                <div class="invisible-box text-box">
+                    <h1 class="display-6">Your matches!</h1>
+                </div>
+                <br>
+            <?php
+
             foreach ($matches as $match) {
+
+                
                 ?>
                     <div class="invisible-box">
                         <div class="profile-image">

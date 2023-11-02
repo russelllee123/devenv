@@ -59,23 +59,31 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <h1 class="display-6"><?=$name?></h1> <br>
           </div>
 
-          <div class="box contain-image">
-            <p><?=$image1?></p>
-            <!-- <img src="../../images/football.jpeg"> -->
-          </div>
+          <?php if ($image1 != "") {?>
+            <div class="box contain-image">
+              <p><?=$image1?></p>
+              <!-- <img src="../../images/football.jpeg"> -->
+            </div>
+          <?php }?>
           
-          <div class="box text-box">
-            <p><?=$description?></p>
-          </div>
+          <?php if ($description != "") {?>
+            <div class="box text-box">
+              <p>Description: <?=$description?></p>
+            </div>
+          <?php }?>
 
-          <div class="box contain-image">
-            <p><?=$image2?></p>
-            <!-- <img src="../../images/football-player.jpeg"> -->
-          </div>
+          <?php if ($image2 != "") {?>
+            <div class="box contain-image">
+              <p><?=$image2?></p>
+              <!-- <img src="../../images/football-player.jpeg"> -->
+            </div>
+          <?php }?>
 
-          <div class="box text-box">
-            <p><?=$members?></p>
-          </div>
+          <?php if ($members != "") {?>
+            <div class="box text-box">
+              <p>Members: <?=$members?></p>
+            </div>
+          <?php }?>
 
           <br>
 

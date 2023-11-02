@@ -67,11 +67,9 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <?php } ?>
           
           <?php if ($description !== ""){ ?>
-
-            <p> 
-                <?=$description?>
-            </p>
-          
+            <div class="box text-box">
+                <p>Description: <?=$description?></p>
+            </div>
           <?php } ?>
 
           <?php if ($image2 !== ""){ ?>
