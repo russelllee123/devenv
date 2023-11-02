@@ -58,6 +58,16 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           <div class="invisible-box text-box">
             <h1 class="display-6"><?=$name?></h1> <br>
           </div>
+
+          <div class="invisible-box text-box">
+            <?php 
+              if ($errorMessage != "") {
+                echo "<br><div class=\"alert alert-danger\" role=\"alert\">
+                        $errorMessage
+                      </div><br>";
+              }
+            ?>
+          </div>
           
 
           <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>

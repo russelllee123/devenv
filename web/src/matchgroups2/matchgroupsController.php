@@ -85,7 +85,6 @@ class matchgroupsController {
                 break;
             case "sendMessage":
                 $this->sendMessage();
-                $this->displayMatch();
                 break;
             case "logout":
                 $this->logout();
@@ -367,7 +366,7 @@ class matchgroupsController {
         include "templates/matches.php";
     }
 
-    public function displayMatch() {
+    public function displayMatch($errorMessage = "") {
         if (isset($_POST["matchID"])) {
             $res = $this->db->query("select * from users where id = $1;", $_POST["matchID"]);
             if (empty($res)) {
@@ -405,17 +404,30 @@ class matchgroupsController {
         }
     }
 
-
-
     public function sendMessage() {
-        if (isset($_POST["matchID"]) && isset($_POST["message"])) {
-            if (!empty($_POST["message"]) && ($_POST["message"] !== $_SESSION["lastMessage"] || $_POST["matchID"] !== $_SESSION["lastPerson"] )) {
-                $this->db->query("insert into messages (sender, recipient, message, time) 
-                values ($1, $2, $3, $4);", $_SESSION["id"], $_POST["matchID"], $_POST["message"], time());
-                $_SESSION["lastMessage"] = $_POST["message"];
-                $_SESSION["lastPerson"] = $_POST["matchID"];
-            }
+        if (!isset($_POST["matchID"]) || !isset($_POST["message"])) {
+            $this->displayMatch("Something went wrong");
+            return;
         }
+        if (empty($_POST["message"])) {
+            $this->displayMatch("Message was blank");
+            return;
+        }
+        if (strlen($_POST["message"]) > 80) {
+            $this->displayMatch("Message was too long");
+            return;
+        }
+        if (($_POST["message"] !== $_SESSION["lastMessage"]) && ($_POST["matchID"] !== $_SESSION["lastPerson"])) {
+            $this->displayMatch("Cannot send the same message twice");
+            return;
+        }
+
+        $this->db->query("insert into messages (sender, recipient, message, time) 
+        values ($1, $2, $3, $4);", $_SESSION["id"], $_POST["matchID"], $_POST["message"], time());
+        $_SESSION["lastMessage"] = $_POST["message"];
+        $_SESSION["lastPerson"] = $_POST["matchID"];
+        
+        $this->displayMatch();
     }
 
     public function logout() {
