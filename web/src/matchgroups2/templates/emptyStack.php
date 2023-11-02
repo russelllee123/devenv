@@ -21,9 +21,9 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
         <link rel="stylesheet" href="/matchgroups2/styles/main.css">
 
         <title>Home</title>     
-    </head> 
-    
-    <!-- Page to display a match you've made and message them -->
+    </head>  
+
+    <!-- Page to display potential matches -->
     
     <body>
         <nav class="navbar navbar-expand-lg bg-body-secondary">
@@ -35,10 +35,10 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" href="?command=stack">Stack </a>
+                    <a class="nav-link active" aria-current="page" href="?command=stack">Stack </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="?command=matches">Matches </a>
+                    <a class="nav-link" href="?command=matches">Matches </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?command=profile">Profile </a>
@@ -53,74 +53,11 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
         </nav>
 
-        <br>
-
-          <div class="invisible-box text-box">
-            <h1 class="display-6"><?=$name?></h1> <br>
-          </div>
-
-          <?php if ($image1 !== "") { $imageURL = 'images/'. $image1; ?>
-            <div class="box contain-image">
-              <img src=<?php echo $imageURL; ?> alt="">  
-            </div>
-          <?php } ?>
-          
-          <?php if ($description != "") {?>
-            <div class="box text-box">
-              <p>Description: <?=$description?></p>
-            </div>
-          <?php }?>
-
-          <?php if ($image2 !== "") { $imageURL = 'images/'. $image2; ?>
-            <div class="box contain-image">
-              <img src=<?php echo $imageURL; ?> alt="">  
-            </div>
-          <?php } ?>
-
-          <?php if ($members != "") {?>
-            <div class="box text-box">
-              <p>Members: <?=$members?></p>
-            </div>
-          <?php }?>
-
           <br>
 
           <div class="invisible-box text-box">
-            <h1 class="display-6">Messages:</h1> <br>
+            <h1 class="display-6">No Possible Matches</h1> <br>
           </div>
-
-          <div class="box row">
-            <div class="column">
-                <br>
-            </div>
-            <?php foreach($messages as $message): 
-              if ($message["sender"] === $idMine){?>
-                  <div class="column d-flex flex-row justify-content-end mb-4 pt-1">
-                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"><?php echo $message["message"];?></p>
-                </div>
-               <?php } ?>
-               <?php if ($message["sender"] === $id){ ?>
-                  <div class="column d-flex flex-row justify-content-start">
-                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"><?php echo $message["message"];?></p>
-                  </div>
-               <?php } ?>
-            <?php endforeach ?>
-            <div class="column">
-                <br>
-            </div>
-          </div>
-
-            <form action="?command=sendMessage" method="post">
-                <input type="hidden" name="matchID" value=<?=$id?> />
-                <div class="invisible-box text-box">
-                  <div class="form-group input-box">
-                    <input class="form-control" id="message" name="message" placeholder="Write messages here...">
-                  </div>
-                </div>
-                <div class="invisible-box text-box">
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </div>
-            </form>
 
           <div class="d-flex flex-column">
             <div class="wrapper flex-grow-1"></div>
@@ -128,7 +65,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
               <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <p class="col-md-4 mb-0 text-muted">&copy; 2023 Russell & Luke, Inc</p>
                 <ul class="nav col-md-4 justify-content-end">
-                <li class="nav-item"><a href="?command=stack" class="nav-link px-2 text-muted">Stack</a></li>
+                  <li class="nav-item"><a href="?command=stack" class="nav-link px-2 text-muted">Stack</a></li>
                   <li class="nav-item"><a href="?command=matches" class="nav-link px-2 text-muted">Matches</a></li>
                   <li class="nav-item"><a href="?command=profile" class="nav-link px-2 text-muted">Profile</a></li>
                 </ul>
