@@ -130,6 +130,8 @@ class matchgroupsController {
             $_SESSION["name"] = $res[0]["name"];
             $_SESSION["email"] = $res[0]["email"];
             $_SESSION["potentialMatch"] = false;
+            $_SESSION["lastMessage"] = "";
+            $_SESSION["lastPerson"] = -1;
             $this->displayStack();
             return;
         } else {
@@ -179,6 +181,8 @@ class matchgroupsController {
             $_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
             $_SESSION["potentialMatch"] = false;
+            $_SESSION["lastMessage"] = "";
+            $_SESSION["lastPerson"] = -1;
             $this->displayProfile();
             return;
         } else {
@@ -405,9 +409,11 @@ class matchgroupsController {
 
     public function sendMessage() {
         if (isset($_POST["matchID"]) && isset($_POST["message"])) {
-            if (!empty($_POST["message"])) {
+            if (!empty($_POST["message"]) && ($_POST["message"] !== $_SESSION["lastMessage"] || $_POST["matchID"] !== $_SESSION["lastPerson"] )) {
                 $this->db->query("insert into messages (sender, recipient, message, time) 
                 values ($1, $2, $3, $4);", $_SESSION["id"], $_POST["matchID"], $_POST["message"], time());
+                $_SESSION["lastMessage"] = $_POST["message"];
+                $_SESSION["lastPerson"] = $_POST["matchID"];
             }
         }
     }
