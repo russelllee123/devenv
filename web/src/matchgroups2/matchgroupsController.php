@@ -193,7 +193,7 @@ class matchgroupsController {
         $this->displayWelcome();
     }
 
-    public function displayProfile(){
+    public function displayProfile($message = ""){
         $res = $this->db->query("select * from users where email = $1;", $_SESSION["email"]);
 
         $name = $res[0]["name"];
@@ -205,59 +205,65 @@ class matchgroupsController {
     }
 
     public function updateDescription() {
-        if(isset($_POST["description"]) && !empty($_POST["description"])) {
-            $this->db->query("update users set description = $1 where email = $2;", $_POST["description"], $_SESSION["email"]);
+        if(!isset($_POST["description"]) || empty($_POST["description"])) {
+            $this->displayProfile("Description submission blank");
+            return;
         }
+        if(strlen($_POST["description"]) > 300) {
+            $this->displayProfile("Description submission too long");
+            return;
+        } 
+        $this->db->query("update users set description = $1 where email = $2;", $_POST["description"], $_SESSION["email"]);
         $this->displayProfile();
     }
 
     public function updateMembers(){
-        if(isset($_POST["members"]) && !empty($_POST["members"])) {
-            $this->db->query("update users set members = $1 where email = $2;", $_POST["members"], $_SESSION["email"]);
+        if(!isset($_POST["members"]) || empty($_POST["members"])) {
+            $this->displayProfile("Members submission blank");
+            return;
         }
-        $this->displayProfile();;
+        if(strlen($_POST["members"]) > 300) {
+            $this->displayProfile("Members submission too long");
+            return;
+        } 
+        $this->db->query("update users set members = $1 where email = $2;", $_POST["members"], $_SESSION["email"]);
+        $this->displayProfile();
     }
 
     public function updatePhoto(){
-        
-        $statusMsg = "";
-        $targetDir = "images/"; 
-        if(isset($_POST["submit"])){ 
-            if(!empty($_FILES["image1"]["name"])){ 
-                $fileName = basename($_FILES["image1"]["name"]); 
-                $targetFilePath = $targetDir . $fileName; 
-                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
-     
-                $types = array('jpg','png','jpeg'); 
-                if(in_array($fileType, $types)){ 
-            // Upload file to server 
-                    if(move_uploaded_file($_FILES["image1"]["tmp_name"], $targetFilePath)){ 
-                // Insert image file name into database 
-                        $this->db->query("update users set image1 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
-                    }
+        if(!isset($_POST["submit"])){ 
+            $this->displayProfile("Photo submission failed");
+            return;
+        }
+        if(!empty($_FILES["image1"]["name"])){ 
+            $fileName = basename($_FILES["image1"]["name"]); 
+            $targetFilePath = "images/" . $fileName; 
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
+    
+            $types = array('jpg','png','jpeg'); 
+            if(in_array($fileType, $types)){ 
+                if(move_uploaded_file($_FILES["image1"]["tmp_name"], $targetFilePath)){ 
+                    $this->db->query("update users set image1 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
                 }
             }
-        } 
+        }
         $this->displayProfile();
     }
 
     public function updatePhoto2(){
-        
-        $statusMsg = "";
-        $targetDir = "images/"; 
-        if(isset($_POST["submit"])){ 
-            if(!empty($_FILES["image2"]["name"])){ 
-                $fileName = basename($_FILES["image2"]["name"]); 
-                $targetFilePath = $targetDir . $fileName; 
-                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
-     
-                $types = array('jpg','png','jpeg'); 
-                if(in_array($fileType, $types)){ 
-            // Upload file to server 
-                    if(move_uploaded_file($_FILES["image2"]["tmp_name"], $targetFilePath)){ 
-                // Insert image file name into database 
-                        $this->db->query("update users set image2 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
-                    }
+        if(!isset($_POST["submit"])){ 
+            $this->displayProfile("Photo submission failed");
+            return;
+        }
+        if(!empty($_FILES["image2"]["name"])){ 
+            $fileName = basename($_FILES["image2"]["name"]); 
+            $targetFilePath = "images/" . $fileName; 
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
+    
+            $types = array('jpg','png','jpeg'); 
+            if(in_array($fileType, $types)){ 
+                if(move_uploaded_file($_FILES["image2"]["tmp_name"], $targetFilePath)){ 
+                    $this->db->query("update users set image2 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
                 }
             }
         }
