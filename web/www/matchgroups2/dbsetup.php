@@ -57,6 +57,6 @@
             sender int REFERENCES users(id),
             recipient int REFERENCES users(id),
             message text,
-            time timestamp);");
+            time int);");
 
 

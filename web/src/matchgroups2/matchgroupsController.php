@@ -374,18 +374,38 @@ class matchgroupsController {
             $image1 = $match["image1"];
             $image2 = $match["image1"];
 
+            $idMine = $_SESSION["id"];
+
+            $res = $this->db->query("select * from messages where 
+            recipient = $1 and sender = $2;", $_POST["matchID"], $_SESSION["id"]);
+
+            $res2 = $this->db->query("select * from messages where 
+            recipient = $2 and sender = $1;", $_POST["matchID"], $_SESSION["id"]);
+
+            $messages = array_merge($res, $res2);
+            $timeSent = array();
+            foreach ($messages as $key => $row){
+                $timeSent[$key] = $row['time'];
+            }
+            array_multisort($timeSent, SORT_ASC, $messages);
+
             include "templates/match.php";
         } else {
             $this->displayMatches();
         }
     }
 
+
+
     public function sendMessage() {
         if (isset($_POST["matchID"]) && isset($_POST["message"])) {
             if (!empty($_POST["message"])) {
                 echo "message recieved";
+                $this->db->query("insert into messages (sender, recipient, message, time) 
+                values ($1, $2, $3, $4);", $_SESSION["id"], $_POST["matchID"], $_POST["message"], time());
             }
         }
+        $this->displayMatch();
     }
 
     public function logout() {
