@@ -274,7 +274,6 @@ class matchgroupsController {
                 unset($likes[$key]);
             }
         }
-        
         $matches = [];
         foreach ($likes as $value) {
             $res = $this->db->query("select * from users where id = $1;", $value["reciever"]);
@@ -282,6 +281,28 @@ class matchgroupsController {
         }
 
         include "templates/matches.php";
+    }
+
+    public function displayMatch() {
+        if (isset($_POST["matchID"])) {
+            $res = $this->db->query("select * from users where id = $1;", $_POST["matchID"]);
+            if (empty($res)) {
+                $this->displayMatches();
+                return;
+            }
+
+            $match = $res[0];
+
+            $name = $match["name"];
+            $description = $match["description"];
+            $members = $match["members"];
+            $image1 = $match["image1"];
+            $image2 = $match["image1"];
+
+            include "templates/match.php";
+        } else {
+            $this->displayMatches();
+        }
     }
 
     public function logout() {

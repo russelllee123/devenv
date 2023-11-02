@@ -68,9 +68,9 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
           
           <?php if ($description !== ""){ ?>
 
-            <div class="invisible-box text-box">
-                <h1 class="display-6">No Possible Matches</h1> <br>
-            </div>
+            <p> 
+                <?=$description?>
+            </p>
           
           <?php } ?>
 

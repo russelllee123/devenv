@@ -53,28 +53,28 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
         </nav>
 
-          <br>
+        <br>
 
           <div class="invisible-box text-box">
-            <h1 class="display-6">UVA Football Team</h1> <br>
+            <h1 class="display-6"><?=$name?></h1> <br>
           </div>
 
           <div class="box contain-image">
-            <img src="../../images/football.jpeg" alt="UVA football logo">
+            <p><?=$image1?></p>
+            <!-- <img src="../../images/football.jpeg"> -->
           </div>
           
           <div class="box text-box">
-            <p>The premier football team at the University of Virginia! Looking for clubs 
-                to mix with and try out the sport of football!
-            </p>
+            <p><?=$description?></p>
           </div>
 
           <div class="box contain-image">
-            <img src="../../images/football-player.jpeg" alt="UVA football player">
+            <p><?=$image2?></p>
+            <!-- <img src="../../images/football-player.jpeg"> -->
           </div>
 
           <div class="box text-box">
-            <p>Members: John James, Joe John, Jordan Jade, Julian Jackson, Jayden Jasper</p>
+            <p><?=$members?></p>
           </div>
 
           <br>

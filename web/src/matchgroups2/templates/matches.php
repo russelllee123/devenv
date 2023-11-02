@@ -65,24 +65,28 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
           <?php if (empty($matches)){ ?>
           <div class="box text-box">
-            <p> <?=$description?>
-            </p>
+                <div class="invisible-box text-box">
+                    <h1 class="display-6">No Possible Matches</h1> <br>
+                </div>
           </div>
           <?php } else {
 
             foreach ($matches as $match) {
                 ?>
-
-                <a href="?command=match" class="text-reset text-decoration-none">
                     <div class="invisible-box">
-                    <div class="profile-image">
-                        <img src="../images/football.jpeg" alt="Football team logo">
+                        <div class="profile-image">
+                            <img src="../images/football.jpeg" alt="Football team logo">
+                        </div>
+                        <div class="full-box text-box">
+                            <h6><?=$match["name"]?>   </h6>
+                            <h5>   <h5>
+                            <form action="?command=match" method="post">
+                                <input type="hidden" name="matchID" value=<?=$match["id"]?> />
+                                <button type="submit" class="btn btn-primary">Check Them Out</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="full-box text-box">
-                        <p><?=$match["name"]?></p>
-                    </div>
-                    </div>
-                </a>
+
 
                 <?php 
             }
