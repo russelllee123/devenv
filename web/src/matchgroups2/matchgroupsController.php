@@ -165,6 +165,11 @@ class matchgroupsController {
             include("templates/stack.php");
         }
     }
+
+    public function displayMatches() {
+        include "template/matches.php";
+    }    
+
     public function logout() {
         session_destroy();
 
