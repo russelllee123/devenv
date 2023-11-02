@@ -175,12 +175,15 @@ class matchgroupsController {
 
     public function displayStack(){
 
-        $res = $this->db->query("select * from users where name <> $1 order by random();", $_SESSION["name"]);
+        /*
+            Currently only displays one match other than the user themself, need to add
+            the ability to like and dislike other users, remove those users from the stack
+        */
+        
+        $res = $this->db->query("select * from users where email != $1 order by random() limit 1;", $_SESSION["email"]);
         if(sizeof($res) == 0){
             include("templates/emptyStack.php");
         }
-        // if user in matches
-        //  call displayStack()
         else {
             $potential_match = $res[0];
             
@@ -194,6 +197,7 @@ class matchgroupsController {
     }
 
     public function displayMatches() {
+        // Pass an associative array of matches or something to that effect
         include "templates/matches.php";
     }
 

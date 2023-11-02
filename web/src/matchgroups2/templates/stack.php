@@ -99,9 +99,9 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
               <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <p class="col-md-4 mb-0 text-muted">&copy; 2023 Russell & Luke, Inc</p>
                 <ul class="nav col-md-4 justify-content-end">
-                  <li class="nav-item"><a href="../home" class="nav-link px-2 text-muted">Stack</a></li>
-                  <li class="nav-item"><a href="../matches" class="nav-link px-2 text-muted">Matches</a></li>
-                  <li class="nav-item"><a href="../profile" class="nav-link px-2 text-muted">Profile</a></li>
+                <li class="nav-item"><a href="?command=stack" class="nav-link px-2 text-muted">Stack</a></li>
+                  <li class="nav-item"><a href="?command=matches" class="nav-link px-2 text-muted">Matches</a></li>
+                  <li class="nav-item"><a href="?command=profile" class="nav-link px-2 text-muted">Profile</a></li>
                 </ul>
               </footer>
             </div>
