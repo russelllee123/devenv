@@ -95,7 +95,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             </div>
             <?php foreach($messages as $message): 
               if ($message["sender"] === $idMine){?>
-                  <div class="column d-flex flex-row justify-content-end mb-4 pt-1">
+                  <div class="column d-flex flex-row justify-content-end">
                     <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"><?php echo $message["message"];?></p>
                 </div>
                <?php } ?>
