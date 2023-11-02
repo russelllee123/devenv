@@ -65,10 +65,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <br>
           </div>
           <div class="row text-center">
-            <h6>Don't have an account?<h6>
-            <form action="?command=displayCreateAccount" method="post"> 
-              <button type="submit" class="btn btn-primary">Make One</button>
-            </form>
+            <h6>Don't have an account?<a href="?command=displayCreateAccount"> Make one</a></h6>
           </div>
         </div>
       </div>

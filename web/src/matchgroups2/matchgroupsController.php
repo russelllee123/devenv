@@ -63,6 +63,14 @@ class matchgroupsController {
             case "match":
                 $this->displayMatch();
                 break;
+            case "like":
+                $this->likeUser();
+                $this->displayStack();
+                break;
+            case "dislike":
+                $this->dislikeUser();
+                $this->displayStack();
+                break;
             case "logout":
                 $this->logout();
             default:
@@ -102,8 +110,10 @@ class matchgroupsController {
                 $this->displayLogin("Password was invalid");
                 return;
             }
+            $_SESSION["id"] = $res[0]["id"];  
             $_SESSION["name"] = $res[0]["name"];
             $_SESSION["email"] = $res[0]["email"];
+            $_SESSION["potentialMatch"] = false;
             $this->displayStack();
             return;
         } else {
@@ -132,11 +142,16 @@ class matchgroupsController {
                 return;
             }
             $this->db->query("insert into users (name, email, password, description, 
-                members, image1, image2) values ($1, $2, $3, $4, $5, $6, $7);",
-                $_POST["name"], $_POST["email"], 
-                password_hash($_POST["passwd"], PASSWORD_DEFAULT), "", "", "", "");
+            members, image1, image2) values ($1, $2, $3, $4, $5, $6, $7);",
+            $_POST["name"], $_POST["email"], 
+            password_hash($_POST["passwd"], PASSWORD_DEFAULT), "", "", "", "");
+
+            $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
+            
+            $_SESSION["id"] = $res[0]["id"];
             $_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
+            $_SESSION["potentialMatch"] = false;
             $this->displayProfile();
             return;
         } else {
@@ -180,12 +195,15 @@ class matchgroupsController {
             the ability to like and dislike other users, remove those users from the stack
         */
         
-        $res = $this->db->query("select * from users where email != $1 order by random() limit 1;", $_SESSION["email"]);
+        $res = $this->db->query("select * from users where email != $1 order 
+            by random() limit 1;", $_SESSION["email"]);
         if(sizeof($res) == 0){
             include("templates/emptyStack.php");
         }
         else {
             $potential_match = $res[0];
+
+            $_SESSION["potentialMatch"] = $potential_match["id"]; 
             
             $name = $potential_match["name"];
             $description = $potential_match["description"];
@@ -196,8 +214,56 @@ class matchgroupsController {
         }
     }
 
+    public function likeUser() {
+        if ($_SESSION["potentialMatch"] !== false) {
+            // Check if user has already liked or disliked this potential match
+            $res = $this->db->query("select * from likes where requestor = $1 and reciever = $2;", $_SESSION["id"], $_SESSION["potentialMatch"]);
+            if (empty($res) == false) {
+                return;
+            }
+            $res = $this->db->query("select * from dislikes where requestor = $1 and reciever = $2;", $_SESSION["id"], $_SESSION["potentialMatch"]);
+            if (empty($res) == false) {
+                return;
+            }
+
+            // Add potential match to user's liked users
+            $this->db->query("insert into likes (requestor, reciever) values ($1, $2);",
+            $_SESSION["id"], $_SESSION["potentialMatch"]);
+
+            echo "like: ". $_SESSION["potentialMatch"];
+        }
+    }
+
+    public function dislikeUser() {
+        if ($_SESSION["potentialMatch"] !== false) {
+            // Check if user has already liked or disliked this potential match
+            $res = $this->db->query("select * from likes where requestor = $1 and reciever = $2;", $_SESSION["id"], $_SESSION["potentialMatch"]);
+            if (empty($res) == false) {
+                return;
+            }
+            $res = $this->db->query("select * from dislikes where requestor = $1 and reciever = $2;", $_SESSION["id"], $_SESSION["potentialMatch"]);
+            if (empty($res) == false) {
+                return;
+            }
+
+            // Add potential match to user's disliked users
+            $this->db->query("insert into dislikes (requestor, reciever) values ($1, $2);",
+            $_SESSION["id"], $_SESSION["potentialMatch"]);
+
+            echo "dislike: " . $_SESSION["potentialMatch"];
+        }
+    }
+
     public function displayMatches() {
         // Pass an associative array of matches or something to that effect
+
+        $res = $this->db->query("select * from likes where requestor = $1", $_SESSION["id"]);
+        echo "Likes: ";
+        print_r($res);
+        $res = $this->db->query("select * from dislikes where requestor = $1", $_SESSION["id"]);
+        echo "Dislikes: ";
+        print_r($res);
+
         include "templates/matches.php";
     }
 

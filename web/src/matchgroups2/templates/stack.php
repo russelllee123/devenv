@@ -87,10 +87,10 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
           <div class="box contain-two-images">
             <div class="half-box">
-              <a href="#"><img src="../images/thumbs-up.jpg" class="align-left" alt="Thumbs-up"></a>
+              <a href="?command=like"><img src="/matchgroups2/images/thumbs-up.jpg" class="align-left" alt="Thumbs-up"></a>
             </div>
             <div class="half-box">
-              <a href="#"><img src="../images/thumbs-down.jpg" class="align-right" alt="Thumbs-down"></a>
+              <a href="?command=dislike"><img src="/matchgroups2/images/thumbs-down.jpg" class="align-right" alt="Thumbs-down"></a>
             </div>
           </div>
           <div class="d-flex flex-column">

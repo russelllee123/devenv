@@ -74,10 +74,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
             <br>
           </div>
           <div class="row text-center">
-            <h6>Already have an account?<h6>
-            <form action="?command=displayLogin" method="post"> 
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+            <h6>Already have an account?<a href="?command=displayLogin"> Sign in</a></h6>
           </div>
         </div>
       </div>
