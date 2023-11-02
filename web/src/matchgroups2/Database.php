@@ -1,5 +1,13 @@
 <?php
+
+/**
+ * Sources used: https://cs4640.cs.virginia.edu, geeksforgeeks.com, stackoverflow.com, w3schools.com, getbootstrap.com
+ * URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups2
+ * Authors: Russell Lee, rsl7ej & Luke Ostyn, lro3uck
+ */
+
 class Database {
+    
     private $dbConnector;
 
     /**
@@ -11,6 +19,14 @@ class Database {
         $database = Config::$db["database"];
         $password = Config::$db["pass"];
         $port = Config::$db["port"];
+
+        if (!is_file("/.dockerenv")) {
+            $host = ServerConfig::$db["host"];
+            $user = ServerConfig::$db["user"];
+            $database = ServerConfig::$db["database"];
+            $password = ServerConfig::$db["pass"];
+            $port = ServerConfig::$db["port"];
+        }
 
         $this->dbConnector = pg_connect("host=$host port=$port dbname=$database user=$user password=$password");
     }

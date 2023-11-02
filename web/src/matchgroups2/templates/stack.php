@@ -2,7 +2,8 @@
 
 <!--
 Sources used: https://cs4640.cs.virginia.edu, geeksforgeeks.com, stackoverflow.com, w3schools.com, getbootstrap.com
-URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
+URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups2
+Authors: Russell Lee, rsl7ej & Luke Ostyn, lro3uck
 -->
 
 <html lang="en">
@@ -18,7 +19,7 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"  crossorigin="anonymous">
 
-        <link rel="stylesheet" href="/matchgroups2/styles/main.css">
+        <link rel="stylesheet" href=<?=$cssPath?>>
 
         <title>Home</title>     
     </head>  
@@ -94,10 +95,10 @@ URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups
 
             <div class="box contain-two-images">
                 <div class="half-box">
-                <a href="?command=like"><img src="/matchgroups2/images/thumbs-up.jpg" class="align-left" alt="Thumbs-up"></a>
+                <a href="?command=like"><img src=<?php echo $rsl7ej . "/matchgroups2/images/thumbs-up.jpg"?> class="align-left" alt="Thumbs-up"></a>
                 </div>
                 <div class="half-box">
-                <a href="?command=dislike"><img src="/matchgroups2/images/thumbs-down.jpg" class="align-right" alt="Thumbs-down"></a>
+                <a href="?command=dislike"><img src=<?php echo $rsl7ej . "/matchgroups2/images/thumbs-down.jpg"?> class="align-right" alt="Thumbs-down"></a>
                 </div>
             </div>
 

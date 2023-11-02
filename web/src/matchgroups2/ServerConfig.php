@@ -6,12 +6,12 @@
  * Authors: Russell Lee, rsl7ej & Luke Ostyn, lro3uck
  */
 
-class Config {
+class ServerConfig {
     public static $db = [
-        "host" => "db",
+        "host" => "localhost",
         "port" => 5432,
-        "user" => "localuser",
-        "pass" => "cs4640LocalUser!",
-        "database" => "example"
+        "user" => "rsl7ej",
+        "pass" => "suu8pvj1ABbi",
+        "database" => "rsl7ej"
     ];
 }

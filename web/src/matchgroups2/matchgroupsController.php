@@ -1,12 +1,27 @@
 <?php
 
+/**
+ * Sources used: https://cs4640.cs.virginia.edu, geeksforgeeks.com, stackoverflow.com, w3schools.com, getbootstrap.com
+ * URL: https://cs4640.cs.virginia.edu/rsl7ej/matchgroups2
+ * Authors: Russell Lee, rsl7ej & Luke Ostyn, lro3uck
+ */
+
 class matchgroupsController {
+
 
     /**
      * Constructor
      */
     public function __construct($input) {
+
         session_start();
+
+        if (is_file("/.dockerenv")) {
+            $_SESSION["CSSPATH"] = "/matchgroups2/styles/main.css";
+        } else {
+            $_SESSION["CSSPATH"] = "/rsl7ej/matchgroups2/styles/main.css";
+        }
+
         $this->db = new Database();
         
         $this->input = $input;
@@ -53,16 +68,16 @@ class matchgroupsController {
                 $this->displayStack();
                 break;
             case "updateDescription":
-                $this->updateDescription();
+                $this->updateContent("description");
                 break;
             case "updateMembers":
-                $this->updateMembers();
+                $this->updateContent("members");
                 break;
             case "updatePhoto":
-                $this->updatePhoto();
+                $this->updatePhoto("image1");
                 break;
             case "updatePhoto2":
-                $this->updatePhoto2();
+                $this->updatePhoto("image2");
                 break;
             case "updateProfile":
                 $this->updateProfile();
@@ -74,6 +89,9 @@ class matchgroupsController {
                 break;
             case "match":
                 $this->displayMatch();
+                break;
+            case "getMyInformation":
+                $this->getMyInformation();
                 break;
             case "like":
                 $this->likeUser();
@@ -95,23 +113,57 @@ class matchgroupsController {
         }
     }
 
+    /** 
+     * Determine image path
+     */
+    public function returnImagePath() {
+        if (is_file("/.dockerenv")) {
+            return "";
+        } else {
+            return "/rsl7ej/matchgroups2/";
+        }
+    }
+
     /**
-     * Show the welcome page to the user.
+     * Determine CSS path
+     */
+    public function returnPath() {
+        if (is_file("/.dockerenv")) {
+            return "/matchgroups2/styles/main.css";
+        } else {
+            return "/rsl7ej/matchgroups2/styles/main.css";
+        }
+    }
+
+    /**
+     * Show the welcome page to the user
      */
     public function displayWelcome() {
+        $cssPath = $this->returnPath();
         include("templates/welcome.php");
     }
 
+    /**
+     * Show the login page to the user
+     */
     public function displayLogin($message = "") {
+        $cssPath = $this->returnPath();
         include("templates/login.php");
     }
 
+    /**
+     * Show the account creation page to the user
+     */
     public function displayCreateAccount($message = "") {
+        $cssPath = $this->returnPath();
         include("templates/createAccount.php");
     }
 
+    /**
+     * Log user into system, establish user session
+     */
     public function login() {
-        // need a name, email, and password
+        // Need a name, email, and password
         if(isset($_POST["email"]) && !empty($_POST["email"]) &&
         isset($_POST["passwd"]) && !empty($_POST["passwd"])) {
             // Check if user is in database
@@ -120,7 +172,7 @@ class matchgroupsController {
                 $this->displayLogin("Email was invalid");
                 return;
             }
-            // User was in database, check if password was incorrect
+            // If user was in database, check if password was incorrect
             if (password_verify($_POST["passwd"], $res[0]["password"]) == false) {
                 $this->displayLogin("Password was invalid");
                 return;
@@ -141,6 +193,9 @@ class matchgroupsController {
         $this->displayWelcome();
     }
 
+    /**
+     * Validate inputted email with regex
+     */
     function validateEmail($email) {
         $baseline = "/^[a-zA-Z0-9+_\-]+(|[a-zA-Z0-9+_.\-]*[a-zA-Z0-9+_\-]+)@[a-zA-Z0-9]+[a-zA-Z0-9.\-]*\.[a-zA-Z0-9.\-]*[a-zA-Z0-9]+$/";
         if (preg_match($baseline, $email) == 0)
@@ -148,6 +203,9 @@ class matchgroupsController {
         return true; 
     }
     
+    /**
+     * Create a user account
+     */
     public function createAccount() {
         // need a name, email, and password
         if(isset($_POST["name"]) && !empty($_POST["name"]) &&
@@ -192,7 +250,12 @@ class matchgroupsController {
         $this->displayWelcome();
     }
 
+    /**
+     * Display user profile page
+     */
     public function displayProfile($message = ""){
+        
+        $cssPath = $this->returnPath();
         $res = $this->db->query("select * from users where email = $1;", $_SESSION["email"]);
 
         $name = $res[0]["name"];
@@ -203,79 +266,66 @@ class matchgroupsController {
         include("templates/profile.php");
     }
 
-    public function updateDescription() {
-        if(!isset($_POST["description"]) || empty($_POST["description"])) {
-            $this->displayProfile("Description submission blank");
+    /**
+     * Change user description or members
+     */
+    public function updateContent($attribute = "") {
+        if(!isset($_POST[$attribute]) || empty($_POST[$attribute])) {
+            $this->displayProfile("$attribute submission blank");
             return;
         }
-        if(strlen($_POST["description"]) > 300) {
-            $this->displayProfile("Description submission too long");
+        if(strlen($_POST[$attribute]) > 300) {
+            $this->displayProfile("$attribute submission too long");
             return;
         } 
-        $this->db->query("update users set description = $1 where email = $2;", $_POST["description"], $_SESSION["email"]);
+        $this->db->query("update users set $attribute = $1 where email = $2;", $_POST[$attribute], $_SESSION["email"]);
         $this->displayProfile();
     }
 
-    public function updateMembers(){
-        if(!isset($_POST["members"]) || empty($_POST["members"])) {
-            $this->displayProfile("Members submission blank");
-            return;
-        }
-        if(strlen($_POST["members"]) > 300) {
-            $this->displayProfile("Members submission too long");
-            return;
-        } 
-        $this->db->query("update users set members = $1 where email = $2;", $_POST["members"], $_SESSION["email"]);
-        $this->displayProfile();
-    }
-
-    public function updatePhoto(){
+    /**
+     * Update user's photos
+     */
+    public function updatePhoto($image = ""){
+        $imagePath = $this->returnImagePath();
         if(!isset($_POST["submit"])){ 
             $this->displayProfile("Photo submission failed");
             return;
         }
-        if(!empty($_FILES["image1"]["name"])){ 
-            $fileName = basename($_FILES["image1"]["name"]); 
-            $targetFilePath = "images/" . $fileName; 
+        if(!empty($_FILES[$image]["name"])){ 
+            $fileName = basename($_FILES[$image]["name"]); 
+            $targetFilePath = $imagePath . "images/" . $fileName; 
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
     
             $types = array('jpg','png','jpeg'); 
             if(in_array($fileType, $types)){ 
-                if(move_uploaded_file($_FILES["image1"]["tmp_name"], $targetFilePath)){ 
-                    $this->db->query("update users set image1 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
+                if(move_uploaded_file($_FILES[$image]["tmp_name"], $targetFilePath)){ 
+                    $this->db->query("update users set $image = $1 where email = $2;", $fileName, $_SESSION["email"]); 
                 }
             }
         }
         $this->displayProfile();
     }
 
-    public function updatePhoto2(){
-        if(!isset($_POST["submit"])){ 
-            $this->displayProfile("Photo submission failed");
-            return;
-        }
-        if(!empty($_FILES["image2"]["name"])){ 
-            $fileName = basename($_FILES["image2"]["name"]); 
-            $targetFilePath = "images/" . $fileName; 
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
-    
-            $types = array('jpg','png','jpeg'); 
-            if(in_array($fileType, $types)){ 
-                if(move_uploaded_file($_FILES["image2"]["tmp_name"], $targetFilePath)){ 
-                    $this->db->query("update users set image2 = $1 where email = $2;", $fileName, $_SESSION["email"]); 
-                }
-            }
-        }
-        $this->displayProfile();
+    /**
+     * Function to return user information
+     */
+    public function getMyInformation() {
+        $info = $this->db->query("select * from users where email = $1;", $_SESSION["email"]);
+        $json = json_encode([$info[0]["name"], $info[0]["email"], $info[0]["description"], 
+        $info[0]["members"], $info[0]["image1"], $info[0]["image2"]], JSON_PRETTY_PRINT);
+        include "templates/returnJSON.php";
     }
 
-    public function displayStack(){
-
-        /*
-            Currently only displays one match other than the user themself, need to add
-            the ability to like and dislike other users, remove those users from the stack
-        */
-        
+    /**
+     * Display user stack with any unseen groups
+     */
+    public function displayStack(){   
+        if (is_file("/.dockerenv")) {
+            $rsl7ej = "";
+        } else {
+            $rsl7ej = "/rsl7ej";
+        }
+        $cssPath = $this->returnPath();
         $res = $this->db->query("select * from users where id != $1 order by random();", $_SESSION["id"]);
         $likes_tmp = $this->db->query("select * from likes where requestor = $1;", $_SESSION["id"]);
         $dislikes_tmp = $this->db->query("select * from dislikes where requestor = $1;", $_SESSION["id"]);
@@ -296,9 +346,7 @@ class matchgroupsController {
             include("templates/stack.php");
         }
         else {
-
             $potential_match = reset($res);
-
             $_SESSION["potentialMatch"] = $potential_match["id"]; 
             
             $name = $potential_match["name"];
@@ -310,6 +358,9 @@ class matchgroupsController {
         }
     }
 
+    /**
+     * Like another user
+     */
     public function likeUser() {
         if ($_SESSION["potentialMatch"] !== false) {
             // Check if user has already liked or disliked this potential match
@@ -327,6 +378,9 @@ class matchgroupsController {
         }
     }
 
+    /**
+     * Dislike another user
+     */
     public function dislikeUser() {
         if ($_SESSION["potentialMatch"] !== false) {
             // Check if user has already liked or disliked this potential match
@@ -344,7 +398,11 @@ class matchgroupsController {
         }
     }
 
+    /**
+     * Display users who user has liked and who have, reciprocally, liked the current session user
+     */
     public function displayMatches() {
+        $cssPath = $this->returnPath();
         // Create and pass an associative array of reciprocal likes
         $likes = $this->db->query("select * from likes where requestor = $1;", $_SESSION["id"]);
         $reciprocal_likes_tmp = $this->db->query("select * from likes where reciever = $1;", $_SESSION["id"]);
@@ -366,47 +424,66 @@ class matchgroupsController {
         include "templates/matches.php";
     }
 
+    /**
+     * Display a particular match's page
+     */
     public function displayMatch($errorMessage = "") {
-        if (isset($_POST["matchID"])) {
-            $res = $this->db->query("select * from users where id = $1;", $_POST["matchID"]);
-            if (empty($res)) {
-                $this->displayMatches();
-                return;
-            }
-
-            $match = $res[0];
-
-            $id = $match["id"];
-            $name = $match["name"];
-            $description = $match["description"];
-            $members = $match["members"];
-            $image1 = $match["image1"];
-            $image2 = $match["image1"];
-
-            $idMine = $_SESSION["id"];
-
-            $res = $this->db->query("select * from messages where 
-            recipient = $1 and sender = $2;", $_POST["matchID"], $_SESSION["id"]);
-
-            $res2 = $this->db->query("select * from messages where 
-            recipient = $2 and sender = $1;", $_POST["matchID"], $_SESSION["id"]);
-
-            $messages = array_merge($res, $res2);
-            $timeSent = array();
-            foreach ($messages as $key => $row){
-                $timeSent[$key] = $row['time'];
-            }
-            array_multisort($timeSent, SORT_ASC, $messages);
-
-            include "templates/match.php";
-        } else {
+        $cssPath = $this->returnPath();
+        if (!isset($_POST["matchID"])) {
             $this->displayMatches();
+            return;
         }
+        $liker = $this->db->query("select * from likes where requestor = $1 and reciever = $2;", $_SESSION["id"], $_POST["matchID"]);
+        $liked = $this->db->query("select * from likes where requestor = $1 and reciever = $2;", $_POST["matchID"], $_SESSION["id"]);
+        if (empty($liker) || empty($liked)) {
+            $this->displayMatches();
+            return;
+        }
+
+        $res = $this->db->query("select * from users where id = $1;", $_POST["matchID"]);
+        if (empty($res)) {
+            $this->displayMatches();
+            return;
+        }
+        $match = $res[0];
+
+        $id = $match["id"];
+        $name = $match["name"];
+        $description = $match["description"];
+        $members = $match["members"];
+        $image1 = $match["image1"];
+        $image2 = $match["image1"];
+
+        $idMine = $_SESSION["id"];
+
+        $res = $this->db->query("select * from messages where 
+        recipient = $1 and sender = $2;", $_POST["matchID"], $_SESSION["id"]);
+
+        $res2 = $this->db->query("select * from messages where 
+        recipient = $2 and sender = $1;", $_POST["matchID"], $_SESSION["id"]);
+
+        $messages = array_merge($res, $res2);
+        $timeSent = array();
+        foreach ($messages as $key => $row){
+            $timeSent[$key] = $row['time'];
+        }
+        array_multisort($timeSent, SORT_ASC, $messages);
+
+        include "templates/match.php";
     }
 
+    /**
+     * Send messages to a partiular match
+     */
     public function sendMessage() {
         if (!isset($_POST["matchID"]) || !isset($_POST["message"])) {
             $this->displayMatch("Something went wrong");
+            return;
+        }
+        $liker = $this->db->query("select * from likes where requestor = $1 and reciever = $2;", $_SESSION["id"], $_POST["matchID"]);
+        $liked = $this->db->query("select * from likes where requestor = $1 and reciever = $2;", $_POST["matchID"], $_SESSION["id"]);
+        if (empty($liker) || empty($liked)) {
+            $this->displayMatches();
             return;
         }
         if (empty($_POST["message"])) {
@@ -417,7 +494,7 @@ class matchgroupsController {
             $this->displayMatch("Message was too long");
             return;
         }
-        if (($_POST["message"] !== $_SESSION["lastMessage"]) && ($_POST["matchID"] !== $_SESSION["lastPerson"])) {
+        if (($_POST["message"] === $_SESSION["lastMessage"]) && ($_POST["matchID"] === $_SESSION["lastPerson"])) {
             $this->displayMatch("Cannot send the same message twice");
             return;
         }
@@ -430,6 +507,9 @@ class matchgroupsController {
         $this->displayMatch();
     }
 
+    /**
+     * Log out of account, end current session
+     */
     public function logout() {
         session_destroy();
         session_start();
